@@ -2823,6 +2823,7 @@ char DHT11_Read();
 
 
 uint8_t buffer;
+uint8_t test =0;
 unsigned char RH_Dec;
 unsigned char RH_Int;
 unsigned char T_Dec;
@@ -2845,7 +2846,6 @@ void main(void) {
         check_sum = DHT11_Read();
         RH = T_Int;
         Humidity = RH_Int;
-
         _delay((unsigned long)((1000)*(8000000/4000.0)));
     }
     return;
@@ -2868,7 +2868,14 @@ void __attribute__((picinterrupt((""))))isr(void){
         }else if(!SSPSTATbits.D_nA && SSPSTATbits.R_nW){
             buffer = SSPBUF;
             BF = 0;
-            SSPBUF = RH;
+            if (test==0){
+                SSPBUF = RH;
+                test = 1;
+            }
+                else if (test==1){
+                SSPBUF = Humidity;
+                test = 0;
+                }
             SSPCONbits.CKP = 1;
             _delay((unsigned long)((250)*(8000000/4000000.0)));
             while(SSPSTATbits.BF);

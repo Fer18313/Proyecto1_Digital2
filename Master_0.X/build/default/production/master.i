@@ -2821,7 +2821,7 @@ void initSETUP(void);
 uint8_t unit0, dec0, unit1, dec1;
 unsigned char Humidity=0;
 unsigned char RH=0;
-
+uint8_t test =0;
 void main(void) {
     initSETUP();
     Lcd_Init();
@@ -2831,7 +2831,14 @@ void main(void) {
     while(1){
         I2C_Master_Start();
         I2C_Master_Write(0x81);
-        RH = I2C_Master_Read(0);
+        if (test==0){
+                RH=I2C_Master_Read(0);
+                test = 1;
+            }
+                else if (test==1){
+                Humidity=I2C_Master_Read(0);
+                test = 0;
+                }
         I2C_Master_Stop();
         _delay((unsigned long)((200)*(8000000/4000.0)));
         Lcd_Set_Cursor(2,1);

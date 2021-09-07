@@ -2909,7 +2909,6 @@ unsigned char buffer[16];
 
 
 void initSETUP(void);
-void str_2_dec(uint16_t var);
 
 void main(void) {
     initSETUP();
@@ -2921,7 +2920,6 @@ void main(void) {
     while(1){
         an_sun = (48.8758*sun_pot)/(5.0-(0.00488758*sun_pot));
         LDR = an_sun;
-        sprintf(buffer,"LCD: %6u",LDR);
         Lcd_Set_Cursor(2,1);
         Lcd_Write_Char(an_sun);
         _delay((unsigned long)((500)*(8000000/4000.0)));

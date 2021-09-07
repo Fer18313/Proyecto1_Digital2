@@ -38,6 +38,7 @@ char DHT11_Read();
 
 // FUNCTION VARIABLES
 uint8_t buffer;
+uint8_t test =0;
 unsigned char RH_Dec;
 unsigned char RH_Int;
 unsigned char T_Dec;
@@ -45,7 +46,6 @@ unsigned char T_Int;
 unsigned char Humidity, RH;
 unsigned char check_sum;
 uint8_t unit0, dec0, unit1, dec1;
-uint32_t RH1;
 
 
 
@@ -60,17 +60,11 @@ void main(void) {
         T_Dec = DHT11_Read();
         check_sum = DHT11_Read();
         RH = T_Int;   
-        Humidity = RH_Int;
-        unit0 = 48 + ((Humidity/10) %10);
-        dec0 = 48 + (Humidity %10);
-        unit1 =48 + ((RH / 10) % 10);
-        dec1 = 48 + (RH % 10);
-        RH1 = (unit0 << 24) + (dec0 << 16) + (unit1 << 8) + dec0;
+        Humidity = RH_Int; 
         __delay_ms(1000);
     }
     return;
 }
-
 void __interrupt()isr(void){
      if(PIR1bits.SSPIF == 1){ 
         SSPCONbits.CKP = 0;     
@@ -89,7 +83,14 @@ void __interrupt()isr(void){
         }else if(!SSPSTATbits.D_nA && SSPSTATbits.R_nW){
             buffer = SSPBUF; //Lee el valor del buffer y lo agrega a la variabl
             BF = 0;
-            SSPBUF = RH1;//Escribe el valor de la variable al buffer
+            if (test==0){
+                SSPBUF = RH;
+                test = 1;
+            }
+                else if (test==1){
+                SSPBUF = Humidity;
+                test = 0;
+                }
             SSPCONbits.CKP = 1;//Habilita los pulsos del reloj SCL
             __delay_us(250);
             while(SSPSTATbits.BF);
