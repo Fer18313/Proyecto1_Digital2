@@ -2845,6 +2845,7 @@ void main(void) {
         check_sum = DHT11_Read();
         RH = T_Int;
         Humidity = RH_Int;
+
         _delay((unsigned long)((1000)*(8000000/4000.0)));
     }
     return;

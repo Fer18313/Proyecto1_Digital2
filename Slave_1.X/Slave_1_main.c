@@ -54,7 +54,7 @@ void main(void) {
         LDR = an_sun;
         sprintf(buffer,"LCD: %6u",LDR);
         Lcd_Set_Cursor(2,1);
-        Lcd_Write_Char(buffer);
+        Lcd_Write_Char(an_sun);
         __delay_ms(500);
     }
     return;

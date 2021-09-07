@@ -35,7 +35,7 @@ void initSETUP(void);
 // VARIABLES
 uint8_t unit0, dec0, unit1, dec1;
 unsigned char Humidity=0;
-unsigned char RH=0;
+unsigned char RH1;
 
 void main(void) {
     initSETUP();
@@ -46,14 +46,10 @@ void main(void) {
     while(1){
         I2C_Master_Start();         //Se inicializa la comunicacion I2C
         I2C_Master_Write(0x81);     //first slave
-        RH = I2C_Master_Read(0); 
+        RH1 = I2C_Master_Read(0); 
         I2C_Master_Stop();          //Termina la comunicacion 
         __delay_ms(200);
         Lcd_Set_Cursor(2,1);             
-        unit0 = 48 + ((Humidity/10) %10);
-        dec0 = 48 + (Humidity %10);
-        unit1 =48 + ((RH / 10) % 10);
-        dec1 = 48 + (RH % 10);
         Lcd_Write_Char(unit0);
         Lcd_Write_Char(dec0);
         Lcd_Write_String("%   ");
