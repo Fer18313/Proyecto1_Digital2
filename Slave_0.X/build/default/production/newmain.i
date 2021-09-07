@@ -2872,8 +2872,6 @@ void __attribute__((picinterrupt((""))))isr(void){
             _delay((unsigned long)((250)*(8000000/4000000.0)));
             while(SSPSTATbits.BF);
         }
-
-
         PIR1bits.SSPIF = 0;
     }
 }

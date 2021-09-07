@@ -49,7 +49,6 @@ void main(void) {
         RH = I2C_Master_Read(0); 
         I2C_Master_Stop();          //Termina la comunicacion 
         __delay_ms(200);
-        
         Lcd_Set_Cursor(2,1);             
         unit0 = 48 + ((Humidity/10) %10);
         dec0 = 48 + (Humidity %10);

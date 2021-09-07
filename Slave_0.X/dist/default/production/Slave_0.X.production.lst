@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.32 build 20210201212658 
-                                                                                               Tue Sep 07 09:36:52 2021
+                                                                                               Tue Sep 07 13:34:59 2021
 
 Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1 
      1                           	processor	16F887
@@ -677,7 +677,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    663  0128                     __ptext1:	
    664 ;; *************** function _startRead *****************
    665 ;; Defined at:
-   666 ;;		line 119 in file "newmain.c"
+   666 ;;		line 117 in file "newmain.c"
    667 ;; Parameters:    Size  Location     Type
    668 ;;		None
    669 ;; Auto vars:     Size  Location     Type
@@ -713,19 +713,19 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    699                           ; Regs used in _startRead: [wreg]
    700                           
    701                           
-   702                           ;newmain.c: 120:     TRISA = 0b00000010;
+   702                           ;newmain.c: 118:     TRISA = 0b00000010;
    703  0128  3002               	movlw	2
    704  0129  1683               	bsf	3,5	;RP0=1, select bank1
    705  012A  1303               	bcf	3,6	;RP1=0, select bank1
    706  012B  0085               	movwf	5	;volatile
    707  012C                     l1083:
    708                           
-   709                           ;newmain.c: 121:     PORTAbits.RA0 = 0;
+   709                           ;newmain.c: 119:     PORTAbits.RA0 = 0;
    710  012C  1283               	bcf	3,5	;RP0=0, select bank0
    711  012D  1303               	bcf	3,6	;RP1=0, select bank0
    712  012E  1005               	bcf	5,0	;volatile
    713                           
-   714                           ;newmain.c: 122:     _delay((unsigned long)((18)*(8000000/4000.0)));
+   714                           ;newmain.c: 120:     _delay((unsigned long)((18)*(8000000/4000.0)));
    715  012F  302F               	movlw	47
    716  0130  00F4               	movwf	??_startRead+1
    717  0131  30BF               	movlw	191
@@ -738,12 +738,12 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    724  0137  2938               	nop2
    725  0138                     l1085:
    726                           
-   727                           ;newmain.c: 123:     PORTAbits.RA0 = 1;
+   727                           ;newmain.c: 121:     PORTAbits.RA0 = 1;
    728  0138  1283               	bcf	3,5	;RP0=0, select bank0
    729  0139  1303               	bcf	3,6	;RP1=0, select bank0
    730  013A  1405               	bsf	5,0	;volatile
    731                           
-   732                           ;newmain.c: 124:     _delay((unsigned long)((30)*(8000000/4000000.0)));
+   732                           ;newmain.c: 122:     _delay((unsigned long)((30)*(8000000/4000000.0)));
    733  013B  3013               	movlw	19
    734  013C  00F3               	movwf	??_startRead
    735  013D                     u357:
@@ -751,7 +751,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    737  013E  293D               	goto	u357
    738  013F  2940               	nop2
    739                           
-   740                           ;newmain.c: 125:     TRISA= 0b00000011;
+   740                           ;newmain.c: 123:     TRISA= 0b00000011;
    741  0140  3003               	movlw	3
    742  0141  1683               	bsf	3,5	;RP0=1, select bank1
    743  0142  1303               	bcf	3,6	;RP1=0, select bank1
@@ -764,7 +764,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    750  0107                     __ptext2:	
    751 ;; *************** function _initSETUP *****************
    752 ;; Defined at:
-   753 ;;		line 96 in file "newmain.c"
+   753 ;;		line 94 in file "newmain.c"
    754 ;; Parameters:    Size  Location     Type
    755 ;;		None
    756 ;; Auto vars:     Size  Location     Type
@@ -800,76 +800,76 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    786                           ; Regs used in _initSETUP: [wreg+status,2+status,0+pclath+cstack]
    787                           
    788                           
-   789                           ;newmain.c: 97:     TRISA = 0;
+   789                           ;newmain.c: 95:     TRISA = 0;
    790  0107  1683               	bsf	3,5	;RP0=1, select bank1
    791  0108  1303               	bcf	3,6	;RP1=0, select bank1
    792  0109  0185               	clrf	5	;volatile
    793                           
-   794                           ;newmain.c: 98:     TRISB = 0;
+   794                           ;newmain.c: 96:     TRISB = 0;
    795  010A  0186               	clrf	6	;volatile
    796                           
-   797                           ;newmain.c: 99:     TRISC = 0;
+   797                           ;newmain.c: 97:     TRISC = 0;
    798  010B  0187               	clrf	7	;volatile
    799                           
-   800                           ;newmain.c: 100:     TRISD = 0;
+   800                           ;newmain.c: 98:     TRISD = 0;
    801  010C  0188               	clrf	8	;volatile
    802                           
-   803                           ;newmain.c: 101:     TRISE = 0;
+   803                           ;newmain.c: 99:     TRISE = 0;
    804  010D  0189               	clrf	9	;volatile
    805                           
-   806                           ;newmain.c: 102:     PORTE = 0;
+   806                           ;newmain.c: 100:     PORTE = 0;
    807  010E  1283               	bcf	3,5	;RP0=0, select bank0
    808  010F  1303               	bcf	3,6	;RP1=0, select bank0
    809  0110  0189               	clrf	9	;volatile
    810                           
-   811                           ;newmain.c: 103:     PORTA = 0;
+   811                           ;newmain.c: 101:     PORTA = 0;
    812  0111  0185               	clrf	5	;volatile
    813                           
-   814                           ;newmain.c: 104:     PORTB = 0;
+   814                           ;newmain.c: 102:     PORTB = 0;
    815  0112  0186               	clrf	6	;volatile
    816                           
-   817                           ;newmain.c: 105:     PORTC = 0;
+   817                           ;newmain.c: 103:     PORTC = 0;
    818  0113  0187               	clrf	7	;volatile
    819                           
-   820                           ;newmain.c: 106:     PORTD = 0;
+   820                           ;newmain.c: 104:     PORTD = 0;
    821  0114  0188               	clrf	8	;volatile
    822                           
-   823                           ;newmain.c: 107:     ANSEL = 0;
+   823                           ;newmain.c: 105:     ANSEL = 0;
    824  0115  1683               	bsf	3,5	;RP0=1, select bank3
    825  0116  1703               	bsf	3,6	;RP1=1, select bank3
    826  0117  0188               	clrf	8	;volatile
    827                           
-   828                           ;newmain.c: 108:     ANSELH = 0;
+   828                           ;newmain.c: 106:     ANSELH = 0;
    829  0118  0189               	clrf	9	;volatile
    830  0119                     l1065:
    831                           
-   832                           ;newmain.c: 109:     OSCCONbits.IRCF2 = 1;
+   832                           ;newmain.c: 107:     OSCCONbits.IRCF2 = 1;
    833  0119  1683               	bsf	3,5	;RP0=1, select bank1
    834  011A  1303               	bcf	3,6	;RP1=0, select bank1
    835  011B  170F               	bsf	15,6	;volatile
    836  011C                     l1067:
    837                           
-   838                           ;newmain.c: 110:     OSCCONbits.IRCF1 = 1;
+   838                           ;newmain.c: 108:     OSCCONbits.IRCF1 = 1;
    839  011C  168F               	bsf	15,5	;volatile
    840  011D                     l1069:
    841                           
-   842                           ;newmain.c: 111:     OSCCONbits.IRCF0 = 1;
+   842                           ;newmain.c: 109:     OSCCONbits.IRCF0 = 1;
    843  011D  160F               	bsf	15,4	;volatile
    844  011E                     l1071:
    845                           
-   846                           ;newmain.c: 112:     OSCCONbits.SCS = 1;
+   846                           ;newmain.c: 110:     OSCCONbits.SCS = 1;
    847  011E  140F               	bsf	15,0	;volatile
    848  011F                     l1073:
    849                           
-   850                           ;newmain.c: 114:     INTCONbits.GIE = 1;
+   850                           ;newmain.c: 112:     INTCONbits.GIE = 1;
    851  011F  178B               	bsf	11,7	;volatile
    852  0120                     l1075:
    853                           
-   854                           ;newmain.c: 115:     INTCONbits.PEIE =1;
+   854                           ;newmain.c: 113:     INTCONbits.PEIE =1;
    855  0120  170B               	bsf	11,6	;volatile
    856  0121                     l1077:
    857                           
-   858                           ;newmain.c: 116:     I2C_Slave_Init(0x80);
+   858                           ;newmain.c: 114:     I2C_Slave_Init(0x80);
    859  0121  3080               	movlw	128
    860  0122  120A  118A  2145  120A  118A  	fcall	_I2C_Slave_Init
    861  0127                     l160:
@@ -976,7 +976,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    961  015F                     __ptext4:	
    962 ;; *************** function _checkResponse *****************
    963 ;; Defined at:
-   964 ;;		line 128 in file "newmain.c"
+   964 ;;		line 126 in file "newmain.c"
    965 ;; Parameters:    Size  Location     Type
    966 ;;		None
    967 ;; Auto vars:     Size  Location     Type
@@ -1012,7 +1012,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    997                           ; Regs used in _checkResponse: []
    998                           
    999  015F                     l166:	
-  1000                           ;newmain.c: 129:     while (PORTAbits.RA0 & 1);
+  1000                           ;newmain.c: 127:     while (PORTAbits.RA0 & 1);
   1001                           
   1002  015F  1283               	bcf	3,5	;RP0=0, select bank0
   1003  0160  1303               	bcf	3,6	;RP1=0, select bank0
@@ -1044,7 +1044,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
   1029  00DB                     __ptext5:	
   1030 ;; *************** function _DHT11_Read *****************
   1031 ;; Defined at:
-  1032 ;;		line 134 in file "newmain.c"
+  1032 ;;		line 132 in file "newmain.c"
   1033 ;; Parameters:    Size  Location     Type
   1034 ;;		None
   1035 ;; Auto vars:     Size  Location     Type
@@ -1081,10 +1081,10 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
   1066                           ; Regs used in _DHT11_Read: [wreg+status,2+status,0]
   1067                           
   1068                           
-  1069                           ;newmain.c: 135:     char i,data = 0;
+  1069                           ;newmain.c: 133:     char i,data = 0;
   1070  00DB  01F6               	clrf	DHT11_Read@data
   1071                           
-  1072                           ;newmain.c: 136:     for (i=0; i<8; i++){
+  1072                           ;newmain.c: 134:     for (i=0; i<8; i++){
   1073  00DC  01F5               	clrf	DHT11_Read@i
   1074  00DD                     l180:
   1075  00DD  1283               	bcf	3,5	;RP0=0, select bank0
@@ -1097,7 +1097,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
   1082  00E3                     u290:
   1083  00E3                     l1095:
   1084                           
-  1085                           ;newmain.c: 138:         _delay((unsigned long)((30)*(8000000/4000000.0)));
+  1085                           ;newmain.c: 136:         _delay((unsigned long)((30)*(8000000/4000000.0)));
   1086  00E3  3013               	movlw	19
   1087  00E4  00F3               	movwf	??_DHT11_Read
   1088  00E5                     u367:
@@ -1106,7 +1106,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
   1091  00E7  28E8               	nop2
   1092  00E8                     l1097:
   1093                           
-  1094                           ;newmain.c: 139:         if(PORTAbits.RA0 & 1)
+  1094                           ;newmain.c: 137:         if(PORTAbits.RA0 & 1)
   1095  00E8  1283               	bcf	3,5	;RP0=0, select bank0
   1096  00E9  1303               	bcf	3,6	;RP1=0, select bank0
   1097  00EA  1C05               	btfss	5,0	;volatile
@@ -1117,13 +1117,13 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
   1102  00EE                     u300:
   1103  00EE                     l1099:
   1104                           
-  1105                           ;newmain.c: 140:             data = ((data<<1) | 1);
+  1105                           ;newmain.c: 138:             data = ((data<<1) | 1);
   1106  00EE  1403               	setc
   1107  00EF  0DF6               	rlf	DHT11_Read@data,f
   1108  00F0  28F7               	goto	l185
   1109  00F1                     l1101:
   1110                           
-  1111                           ;newmain.c: 142:             data = (data<<1);
+  1111                           ;newmain.c: 140:             data = (data<<1);
   1112  00F1  0876               	movf	DHT11_Read@data,w
   1113  00F2  00F3               	movwf	??_DHT11_Read
   1114  00F3  0773               	addwf	??_DHT11_Read,w
@@ -1139,7 +1139,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
   1124  00FB                     u310:
   1125  00FB                     l1103:
   1126                           
-  1127                           ;newmain.c: 144: }
+  1127                           ;newmain.c: 142: }
   1128  00FB  3001               	movlw	1
   1129  00FC  00F3               	movwf	??_DHT11_Read
   1130  00FD  0873               	movf	??_DHT11_Read,w
@@ -1155,7 +1155,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
   1140  0105                     u320:
   1141  0105                     l1107:
   1142                           
-  1143                           ;newmain.c: 145:     return data;
+  1143                           ;newmain.c: 143:     return data;
   1144  0105  0876               	movf	DHT11_Read@data,w
   1145  0106                     l188:
   1146  0106  0008               	return
@@ -1362,7 +1362,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
   1347  0076                     u20_20:
   1348  0076                     i1l152:
   1349                           
-  1350                           ;newmain.c: 92:         PIR1bits.SSPIF = 0;
+  1350                           ;newmain.c: 90:         PIR1bits.SSPIF = 0;
   1351  0076  1283               	bcf	3,5	;RP0=0, select bank0
   1352  0077  1303               	bcf	3,6	;RP1=0, select bank0
   1353  0078  118C               	bcf	12,3	;volatile
@@ -1566,7 +1566,7 @@ DATA                 0      0      16      12        0.0%
 
 
 Microchip Technology PIC Macro Assembler V2.32 build 20210201212658 
-Symbol Table                                                                                   Tue Sep 07 09:36:52 2021
+Symbol Table                                                                                   Tue Sep 07 13:34:59 2021
 
             _SSPSTATbits 0094                       _BF 04A0                       l55 015E  
                      _RH 0077    __end_of_checkResponse 016E                      l160 0127  

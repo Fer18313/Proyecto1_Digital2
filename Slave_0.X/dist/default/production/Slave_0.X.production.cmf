@@ -26,7 +26,7 @@ intentry CODE 0 4 4 8 2
 bssBANK0 BANK0 1 20 20 8 1
 bssCOMMON COMMON 1 77 77 4 1
 config CONFIG 4 2007 2007 2 2
-$C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.o
+$C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
 reset_vec CODE 0 0 0 3 2
 end_init CODE 0 C C 3 2
 config CONFIG 4 2007 2007 2 2
@@ -76,25 +76,25 @@ STRING 16E-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\Slave_0.X.production.o
-F cinit CODE >820:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.s
-F cinit CODE >823:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.s
-F cinit CODE >870:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.s
-10 cinit CODE >871:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.s
-11 cinit CODE >872:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.s
-12 cinit CODE >873:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.s
-13 cinit CODE >876:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.s
-14 cinit CODE >877:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.s
-15 cinit CODE >878:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.s
-16 cinit CODE >879:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.s
-17 cinit CODE >880:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.s
-18 cinit CODE >881:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.s
-19 cinit CODE >882:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.s
-1A cinit CODE >883:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.s
-1B cinit CODE >884:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.s
-1C cinit CODE >885:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.s
-1D cinit CODE >891:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.s
-1D cinit CODE >893:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.s
-1E cinit CODE >894:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.s
+F cinit CODE >820:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
+F cinit CODE >823:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
+F cinit CODE >870:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
+10 cinit CODE >871:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
+11 cinit CODE >872:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
+12 cinit CODE >873:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
+13 cinit CODE >876:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
+14 cinit CODE >877:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
+15 cinit CODE >878:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
+16 cinit CODE >879:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
+17 cinit CODE >880:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
+18 cinit CODE >881:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
+19 cinit CODE >882:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
+1A cinit CODE >883:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
+1B cinit CODE >884:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
+1C cinit CODE >885:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
+1D cinit CODE >891:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
+1D cinit CODE >893:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
+1E cinit CODE >894:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
 4 intentry CODE >67:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
 21 text6 CODE >67:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
 21 text6 CODE >68:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
@@ -118,26 +118,26 @@ F cinit CODE >870:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.s
 6B text6 CODE >87:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
 70 text6 CODE >88:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
 76 text6 CODE >89:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-76 text6 CODE >92:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-79 text6 CODE >94:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-DB text5 CODE >134:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-DB text5 CODE >135:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-DC text5 CODE >136:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-DD text5 CODE >137:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-E3 text5 CODE >138:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-E8 text5 CODE >139:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-EE text5 CODE >140:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-F1 text5 CODE >142:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-F7 text5 CODE >143:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-FB text5 CODE >144:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-101 text5 CODE >144:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-105 text5 CODE >145:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-106 text5 CODE >146:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-15F text4 CODE >128:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-15F text4 CODE >129:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-165 text4 CODE >130:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-169 text4 CODE >131:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-16D text4 CODE >132:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+76 text6 CODE >90:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+79 text6 CODE >92:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+DB text5 CODE >132:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+DB text5 CODE >133:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+DC text5 CODE >134:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+DD text5 CODE >135:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+E3 text5 CODE >136:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+E8 text5 CODE >137:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+EE text5 CODE >138:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+F1 text5 CODE >140:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+F7 text5 CODE >141:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+FB text5 CODE >142:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+101 text5 CODE >142:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+105 text5 CODE >143:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+106 text5 CODE >144:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+15F text4 CODE >126:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+15F text4 CODE >127:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+165 text4 CODE >128:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+169 text4 CODE >129:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+16D text4 CODE >130:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
 145 text3 CODE >93:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\I2C.c
 146 text3 CODE >95:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\I2C.c
 14A text3 CODE >96:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\I2C.c
@@ -150,35 +150,35 @@ FB text5 CODE >144:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0
 158 text3 CODE >103:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\I2C.c
 15B text3 CODE >104:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\I2C.c
 15E text3 CODE >105:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\I2C.c
-107 text2 CODE >96:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-107 text2 CODE >97:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-10A text2 CODE >98:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-10B text2 CODE >99:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-10C text2 CODE >100:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-10D text2 CODE >101:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-10E text2 CODE >102:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-111 text2 CODE >103:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-112 text2 CODE >104:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-113 text2 CODE >105:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-114 text2 CODE >106:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-115 text2 CODE >107:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-118 text2 CODE >108:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-119 text2 CODE >109:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-11C text2 CODE >110:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-11D text2 CODE >111:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-11E text2 CODE >112:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-11F text2 CODE >114:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-120 text2 CODE >115:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-121 text2 CODE >116:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-127 text2 CODE >118:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-128 text1 CODE >119:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-128 text1 CODE >120:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-12C text1 CODE >121:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-12F text1 CODE >122:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-138 text1 CODE >123:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-13B text1 CODE >124:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-140 text1 CODE >125:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
-144 text1 CODE >126:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+107 text2 CODE >94:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+107 text2 CODE >95:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+10A text2 CODE >96:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+10B text2 CODE >97:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+10C text2 CODE >98:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+10D text2 CODE >99:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+10E text2 CODE >100:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+111 text2 CODE >101:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+112 text2 CODE >102:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+113 text2 CODE >103:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+114 text2 CODE >104:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+115 text2 CODE >105:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+118 text2 CODE >106:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+119 text2 CODE >107:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+11C text2 CODE >108:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+11D text2 CODE >109:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+11E text2 CODE >110:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+11F text2 CODE >112:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+120 text2 CODE >113:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+121 text2 CODE >114:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+127 text2 CODE >116:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+128 text1 CODE >117:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+128 text1 CODE >118:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+12C text1 CODE >119:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+12F text1 CODE >120:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+138 text1 CODE >121:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+13B text1 CODE >122:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+140 text1 CODE >123:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
+144 text1 CODE >124:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
 80 maintext CODE >51:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
 80 maintext CODE >52:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
 85 maintext CODE >53:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
@@ -217,20 +217,20 @@ _BF 4A0 0 ABS 0 - dist/default/production\Slave_0.X.production.o
 _RH 77 0 COMMON 1 bssCOMMON dist/default/production\Slave_0.X.production.o
 __Hstrings 0 0 ABS 0 strings -
 _PEIE 5E 0 ABS 0 - dist/default/production\Slave_0.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.o
+___sp 0 0 STACK 2 stack C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
 _main 100 0 CODE 0 maintext dist/default/production\Slave_0.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\Slave_0.X.production.o
-start 18 0 CODE 0 init C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.o
+start 18 0 CODE 0 init C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
 __size_of_main 0 0 ABS 0 - dist/default/production\Slave_0.X.production.o
 __HbssCOMMON 0 0 ABS 0 bssCOMMON -
 __Hpowerup 0 0 CODE 0 powerup -
 __end_of_DHT11_Read 20E 0 CODE 0 text5 dist/default/production\Slave_0.X.production.o
-intlevel0 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
 _OSCCONbits 8F 0 ABS 0 - dist/default/production\Slave_0.X.production.o
 wtemp0 7E 0 ABS 0 - dist/default/production\Slave_0.X.production.o
@@ -240,8 +240,8 @@ _ANSELH 189 0 ABS 0 - dist/default/production\Slave_0.X.production.o
 _SSPCONbits 14 0 ABS 0 - dist/default/production\Slave_0.X.production.o
 __Lmaintext 0 0 ABS 0 maintext -
 __end_of_startRead 28A 0 CODE 0 text1 dist/default/production\Slave_0.X.production.o
-___stackhi 0 0 ABS 0 - C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.o
-___stacklo 0 0 ABS 0 - C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.o
+___stackhi 0 0 ABS 0 - C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
+___stacklo 0 0 ABS 0 - C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
 __size_of_startRead 0 0 ABS 0 - dist/default/production\Slave_0.X.production.o
 _I2C_Slave_Init 28A 0 CODE 0 text3 dist/default/production\Slave_0.X.production.o
 start_initialization 1E 0 CODE 0 cinit dist/default/production\Slave_0.X.production.o
@@ -255,7 +255,7 @@ _SSPBUF 13 0 ABS 0 - dist/default/production\Slave_0.X.production.o
 _SSPCON 14 0 ABS 0 - dist/default/production\Slave_0.X.production.o
 _TRISC3 43B 0 ABS 0 - dist/default/production\Slave_0.X.production.o
 _TRISC4 43C 0 ABS 0 - dist/default/production\Slave_0.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.o
+___int_sp 0 0 STACK 2 stack C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -305,7 +305,7 @@ _buffer 7A 0 COMMON 1 bssCOMMON dist/default/production\Slave_0.X.production.o
 saved_w 7E 0 ABS 0 - dist/default/production\Slave_0.X.production.o
 __end_of_isr 100 0 CODE 0 text6 dist/default/production\Slave_0.X.production.o
 __Lintentry 8 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\FERNAN~1\AppData\Local\Temp\xcAsffk.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
 __LbssBANK0 0 0 ABS 0 bssBANK0 -
 __end_of_initSETUP 250 0 CODE 0 text2 dist/default/production\Slave_0.X.production.o
 _checkResponse 2BE 0 CODE 0 text4 dist/default/production\Slave_0.X.production.o
