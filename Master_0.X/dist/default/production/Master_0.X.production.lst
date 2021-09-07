@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.32 build 20210201212658 
-                                                                                               Tue Sep 07 09:36:58 2021
+                                                                                               Tue Sep 07 13:36:54 2021
 
 Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1 
      1                           	processor	16F887
@@ -851,14 +851,14 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    837  0760  0000               	nop
    838  0761                     l1381:
    839                           
-   840                           ;master.c: 53:         Lcd_Set_Cursor(2,1);
+   840                           ;master.c: 52:         Lcd_Set_Cursor(2,1);
    841  0761  01F4               	clrf	Lcd_Set_Cursor@b
    842  0762  0AF4               	incf	Lcd_Set_Cursor@b,f
    843  0763  3002               	movlw	2
    844  0764  120A  118A  259A  120A  118A  	fcall	_Lcd_Set_Cursor
    845  0769                     l1383:
    846                           
-   847                           ;master.c: 54:         unit0 = 48 + ((Humidity/10) %10);
+   847                           ;master.c: 53:         unit0 = 48 + ((Humidity/10) %10);
    848  0769  3030               	movlw	48
    849  076A  1283               	bcf	3,5	;RP0=0, select bank0
    850  076B  1303               	bcf	3,6	;RP1=0, select bank0
@@ -867,14 +867,14 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    853  076E  00B1               	movwf	_unit0
    854  076F                     l1385:
    855                           
-   856                           ;master.c: 55:         dec0 = 48 + (Humidity %10);
+   856                           ;master.c: 54:         dec0 = 48 + (Humidity %10);
    857  076F  3030               	movlw	48
    858  0770  00A9               	movwf	??_main
    859  0771  0829               	movf	??_main,w
    860  0772  00B0               	movwf	_dec0
    861  0773                     l1387:
    862                           
-   863                           ;master.c: 56:         unit1 =48 + ((RH / 10) % 10);
+   863                           ;master.c: 55:         unit1 =48 + ((RH / 10) % 10);
    864  0773  300A               	movlw	10
    865  0774  00F9               	movwf	___awmod@divisor
    866  0775  3000               	movlw	0
@@ -905,7 +905,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    891  0796  00AF               	movwf	_unit1
    892  0797                     l1389:
    893                           
-   894                           ;master.c: 57:         dec1 = 48 + (RH % 10);
+   894                           ;master.c: 56:         dec1 = 48 + (RH % 10);
    895  0797  300A               	movlw	10
    896  0798  00F9               	movwf	___awmod@divisor
    897  0799  3000               	movlw	0
@@ -927,51 +927,51 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    913  07AD  00AE               	movwf	_dec1
    914  07AE                     l1391:
    915                           
-   916                           ;master.c: 58:         Lcd_Write_Char(unit0);
+   916                           ;master.c: 57:         Lcd_Write_Char(unit0);
    917  07AE  3030               	movlw	48
    918  07AF  120A  118A  246A  120A  118A  	fcall	_Lcd_Write_Char
    919  07B4                     l1393:
    920                           
-   921                           ;master.c: 59:         Lcd_Write_Char(dec0);
+   921                           ;master.c: 58:         Lcd_Write_Char(dec0);
    922  07B4  3030               	movlw	48
    923  07B5  120A  118A  246A  120A  118A  	fcall	_Lcd_Write_Char
    924  07BA                     l1395:
    925                           
-   926                           ;master.c: 60:         Lcd_Write_String("%   ");
+   926                           ;master.c: 59:         Lcd_Write_String("%   ");
    927  07BA  3012               	movlw	(low ((STR_2-__stringbase)| (0+32768)))& (0+255)
    928  07BB  120A  118A  2488  120A  118A  	fcall	_Lcd_Write_String
    929  07C0                     l1397:
    930                           
-   931                           ;master.c: 61:         Lcd_Write_Char(unit1);
+   931                           ;master.c: 60:         Lcd_Write_Char(unit1);
    932  07C0  1283               	bcf	3,5	;RP0=0, select bank0
    933  07C1  1303               	bcf	3,6	;RP1=0, select bank0
    934  07C2  082F               	movf	_unit1,w
    935  07C3  120A  118A  246A  120A  118A  	fcall	_Lcd_Write_Char
    936  07C8                     l1399:
    937                           
-   938                           ;master.c: 62:         Lcd_Write_Char(dec1);
+   938                           ;master.c: 61:         Lcd_Write_Char(dec1);
    939  07C8  1283               	bcf	3,5	;RP0=0, select bank0
    940  07C9  1303               	bcf	3,6	;RP1=0, select bank0
    941  07CA  082E               	movf	_dec1,w
    942  07CB  120A  118A  246A  120A  118A  	fcall	_Lcd_Write_Char
    943  07D0                     l1401:
    944                           
-   945                           ;master.c: 63:         Lcd_Write_Char("°");
+   945                           ;master.c: 62:         Lcd_Write_Char("°");
    946  07D0  301F               	movlw	(low ((STR_3-__stringbase)| (0+32768)))& (0+255)
    947  07D1  120A  118A  246A  120A  118A  	fcall	_Lcd_Write_Char
    948  07D6                     l1403:
    949                           
-   950                           ;master.c: 64:         Lcd_Write_String("C  ");
+   950                           ;master.c: 63:         Lcd_Write_String("C  ");
    951  07D6  3017               	movlw	(low ((STR_4-__stringbase)| (0+32768)))& (0+255)
    952  07D7  120A  118A  2488  120A  118A  	fcall	_Lcd_Write_String
    953  07DC                     l1405:
    954                           
-   955                           ;master.c: 65:         Lcd_Write_String("000");
+   955                           ;master.c: 64:         Lcd_Write_String("000");
    956  07DC  301B               	movlw	(low ((STR_5-__stringbase)| (0+32768)))& (0+255)
    957  07DD  120A  118A  2488  120A  118A  	fcall	_Lcd_Write_String
    958  07E2                     l1407:
    959                           
-   960                           ;master.c: 66:         _delay((unsigned long)((1000)*(8000000/4000.0)));
+   960                           ;master.c: 65:         _delay((unsigned long)((1000)*(8000000/4000.0)));
    961  07E2  300B               	movlw	11
    962  07E3  1283               	bcf	3,5	;RP0=0, select bank0
    963  07E4  1303               	bcf	3,6	;RP1=0, select bank0
@@ -995,7 +995,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    981  0513                     __ptext1:	
    982 ;; *************** function _initSETUP *****************
    983 ;; Defined at:
-   984 ;;		line 71 in file "master.c"
+   984 ;;		line 70 in file "master.c"
    985 ;; Parameters:    Size  Location     Type
    986 ;;		None
    987 ;; Auto vars:     Size  Location     Type
@@ -1031,92 +1031,92 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
   1017                           ; Regs used in _initSETUP: [wreg+status,2+status,0+pclath+cstack]
   1018                           
   1019                           
-  1020                           ;master.c: 72:     TRISA = 0b00000001;
+  1020                           ;master.c: 71:     TRISA = 0b00000001;
   1021  0513  3001               	movlw	1
   1022  0514  1683               	bsf	3,5	;RP0=1, select bank1
   1023  0515  1303               	bcf	3,6	;RP1=0, select bank1
   1024  0516  0085               	movwf	5	;volatile
   1025  0517                     l1165:
   1026                           
-  1027                           ;master.c: 73:     TRISB = 0;
+  1027                           ;master.c: 72:     TRISB = 0;
   1028  0517  0186               	clrf	6	;volatile
   1029  0518                     l1167:
   1030                           
-  1031                           ;master.c: 74:     TRISC = 0;
+  1031                           ;master.c: 73:     TRISC = 0;
   1032  0518  0187               	clrf	7	;volatile
   1033  0519                     l1169:
   1034                           
-  1035                           ;master.c: 75:     TRISD = 0;
+  1035                           ;master.c: 74:     TRISD = 0;
   1036  0519  0188               	clrf	8	;volatile
   1037  051A                     l1171:
   1038                           
-  1039                           ;master.c: 76:     TRISE = 0;
+  1039                           ;master.c: 75:     TRISE = 0;
   1040  051A  0189               	clrf	9	;volatile
   1041  051B                     l1173:
   1042                           
-  1043                           ;master.c: 77:     PORTE = 0;
+  1043                           ;master.c: 76:     PORTE = 0;
   1044  051B  1283               	bcf	3,5	;RP0=0, select bank0
   1045  051C  1303               	bcf	3,6	;RP1=0, select bank0
   1046  051D  0189               	clrf	9	;volatile
   1047  051E                     l1175:
   1048                           
-  1049                           ;master.c: 78:     PORTA = 0;
+  1049                           ;master.c: 77:     PORTA = 0;
   1050  051E  0185               	clrf	5	;volatile
   1051  051F                     l1177:
   1052                           
-  1053                           ;master.c: 79:     PORTB = 0;
+  1053                           ;master.c: 78:     PORTB = 0;
   1054  051F  0186               	clrf	6	;volatile
   1055  0520                     l1179:
   1056                           
-  1057                           ;master.c: 80:     PORTC = 0;
+  1057                           ;master.c: 79:     PORTC = 0;
   1058  0520  0187               	clrf	7	;volatile
   1059  0521                     l1181:
   1060                           
-  1061                           ;master.c: 81:     PORTD = 0;
+  1061                           ;master.c: 80:     PORTD = 0;
   1062  0521  0188               	clrf	8	;volatile
   1063  0522                     l1183:
   1064                           
-  1065                           ;master.c: 82:     ANSEL = 0b00000001;
+  1065                           ;master.c: 81:     ANSEL = 0b00000001;
   1066  0522  3001               	movlw	1
   1067  0523  1683               	bsf	3,5	;RP0=1, select bank3
   1068  0524  1703               	bsf	3,6	;RP1=1, select bank3
   1069  0525  0088               	movwf	8	;volatile
   1070                           
-  1071                           ;master.c: 83:     ANSELH = 0;
+  1071                           ;master.c: 82:     ANSELH = 0;
   1072  0526  0189               	clrf	9	;volatile
   1073  0527                     l1185:
   1074                           
-  1075                           ;master.c: 84:     OSCCONbits.IRCF2 = 1;
+  1075                           ;master.c: 83:     OSCCONbits.IRCF2 = 1;
   1076  0527  1683               	bsf	3,5	;RP0=1, select bank1
   1077  0528  1303               	bcf	3,6	;RP1=0, select bank1
   1078  0529  170F               	bsf	15,6	;volatile
   1079  052A                     l1187:
   1080                           
-  1081                           ;master.c: 85:     OSCCONbits.IRCF1 = 1;
+  1081                           ;master.c: 84:     OSCCONbits.IRCF1 = 1;
   1082  052A  168F               	bsf	15,5	;volatile
   1083  052B                     l1189:
   1084                           
-  1085                           ;master.c: 86:     OSCCONbits.IRCF0 = 1;
+  1085                           ;master.c: 85:     OSCCONbits.IRCF0 = 1;
   1086  052B  160F               	bsf	15,4	;volatile
   1087  052C                     l1191:
   1088                           
-  1089                           ;master.c: 87:     OSCCONbits.SCS = 1;
+  1089                           ;master.c: 86:     OSCCONbits.SCS = 1;
   1090  052C  140F               	bsf	15,0	;volatile
   1091  052D                     l1193:
   1092                           
-  1093                           ;master.c: 89:     ADCON1bits.ADFM = 0;
+  1093                           ;master.c: 88:     ADCON1bits.ADFM = 0;
   1094  052D  139F               	bcf	31,7	;volatile
   1095  052E                     l1195:
   1096                           
-  1097                           ;master.c: 90:     ADCON1bits.VCFG0 = 0;
+  1097                           ;master.c: 89:     ADCON1bits.VCFG0 = 0;
   1098  052E  121F               	bcf	31,4	;volatile
   1099  052F                     l1197:
   1100                           
-  1101                           ;master.c: 91:     ADCON1bits.VCFG1 = 0;
+  1101                           ;master.c: 90:     ADCON1bits.VCFG1 = 0;
   1102  052F  129F               	bcf	31,5	;volatile
   1103  0530                     l1199:
   1104                           
-  1105                           ;master.c: 92:     ADCON0bits.ADCS = 0b10;
+  1105                           ;master.c: 91:     ADCON0bits.ADCS = 0b10;
   1106  0530  1283               	bcf	3,5	;RP0=0, select bank0
   1107  0531  1303               	bcf	3,6	;RP1=0, select bank0
   1108  0532  081F               	movf	31,w	;volatile
@@ -1125,16 +1125,16 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
   1111  0535  009F               	movwf	31	;volatile
   1112  0536                     l1201:
   1113                           
-  1114                           ;master.c: 93:     ADCON0bits.CHS = 0;
+  1114                           ;master.c: 92:     ADCON0bits.CHS = 0;
   1115  0536  30C3               	movlw	-61
   1116  0537  059F               	andwf	31,f	;volatile
   1117  0538                     l1203:
   1118                           
-  1119                           ;master.c: 94:     ADCON0bits.ADON = 1;
+  1119                           ;master.c: 93:     ADCON0bits.ADON = 1;
   1120  0538  141F               	bsf	31,0	;volatile
   1121  0539                     l1205:
   1122                           
-  1123                           ;master.c: 95:     _delay((unsigned long)((50)*(8000000/4000000.0)));
+  1123                           ;master.c: 94:     _delay((unsigned long)((50)*(8000000/4000000.0)));
   1124  0539  3020               	movlw	32
   1125  053A  1283               	bcf	3,5	;RP0=0, select bank0
   1126  053B  1303               	bcf	3,6	;RP1=0, select bank0
@@ -1145,21 +1145,21 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
   1131  053F  0000               	nop
   1132  0540                     l1207:
   1133                           
-  1134                           ;master.c: 96:     ADCON0bits.GO = 1;
+  1134                           ;master.c: 95:     ADCON0bits.GO = 1;
   1135  0540  1283               	bcf	3,5	;RP0=0, select bank0
   1136  0541  1303               	bcf	3,6	;RP1=0, select bank0
   1137  0542  149F               	bsf	31,1	;volatile
   1138  0543                     l1209:
   1139                           
-  1140                           ;master.c: 98:     INTCONbits.GIE = 1;
+  1140                           ;master.c: 97:     INTCONbits.GIE = 1;
   1141  0543  178B               	bsf	11,7	;volatile
   1142  0544                     l1211:
   1143                           
-  1144                           ;master.c: 99:     INTCONbits.PEIE =1;
+  1144                           ;master.c: 98:     INTCONbits.PEIE =1;
   1145  0544  170B               	bsf	11,6	;volatile
   1146  0545                     l1213:
   1147                           
-  1148                           ;master.c: 100:     I2C_Master_Init(100000);
+  1148                           ;master.c: 99:     I2C_Master_Init(100000);
   1149  0545  3000               	movlw	0
   1150  0546  00A3               	movwf	I2C_Master_Init@c+3
   1151  0547  3001               	movlw	1
@@ -2998,7 +2998,7 @@ DATA                 0      0      20      12        0.0%
 
 
 Microchip Technology PIC Macro Assembler V2.32 build 20210201212658 
-Symbol Table                                                                                   Tue Sep 07 09:36:58 2021
+Symbol Table                                                                                   Tue Sep 07 13:36:54 2021
 
                         pc 0002                         l79 0552                         _RH 002C  
              ___awdiv@sign 0076                         fsr 0004                        l111 0436  

@@ -32,8 +32,12 @@
 
 
 // VARIABLES
-uint16_t sun_pot=0;
-uint8_t Unit, dec0, dec1;
+unsigned int sun_pot=0;
+float an_sun=0;
+unsigned long LDR=0;
+unsigned char buffer[16];
+//uint8_t Unit, dec0, dec1;
+
 // PROTOTYPE FUNCTIONS
 void initSETUP(void);
 void str_2_dec(uint16_t var);
@@ -46,31 +50,21 @@ void main(void) {
     Lcd_Write_String(" S1:   S2:   S3:");
     ADCON0bits.GO = 1;
     while(1){
-        str_2_dec(sun_pot);
+        an_sun = (48.8758*sun_pot)/(5.0-(0.00488758*sun_pot));
+        LDR = an_sun;
+        sprintf(buffer,"LCD: %6u",LDR);
         Lcd_Set_Cursor(2,1);
-        Lcd_Write_Char(Unit);
-        Lcd_Write_Char(dec0);
-        Lcd_Write_Char(dec1);
+        Lcd_Write_Char(buffer);
+        __delay_ms(500);
     }
     return;
 }
-void str_2_dec(uint16_t var){ 
-    uint16_t val_0;
-    val_0 = var;                  
-    Unit = (val_0/100) ;                
-    val_0 = (val_0 - (Unit*100));
-    dec0 = (val_0/10);              
-    val_0 = (val_0 - (dec0*10));
-    dec1 = (val_0);                
-    
-    Unit = Unit + 48;          //ASCII
-    dec0 = dec0 + 48;
-    dec1 = dec1 + 48;
-    
-}
+
 void __interrupt()isr(void){
     if (ADIF == 1){                            
         sun_pot = ADRESH;
+        sun_pot = sun_pot <<8;
+        sun_pot |= ADRESL;
         ADIF = 0; //Limpiar la bandera de ADC
         __delay_us(50);
         ADCON0bits.GO = 1; //Inicia la conversión de ADC

@@ -2834,7 +2834,6 @@ void main(void) {
         RH = I2C_Master_Read(0);
         I2C_Master_Stop();
         _delay((unsigned long)((200)*(8000000/4000.0)));
-
         Lcd_Set_Cursor(2,1);
         unit0 = 48 + ((Humidity/10) %10);
         dec0 = 48 + (Humidity %10);

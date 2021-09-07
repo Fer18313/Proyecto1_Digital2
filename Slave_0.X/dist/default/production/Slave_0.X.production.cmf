@@ -26,7 +26,7 @@ intentry CODE 0 4 4 8 2
 bssBANK0 BANK0 1 20 20 8 1
 bssCOMMON COMMON 1 77 77 4 1
 config CONFIG 4 2007 2007 2 2
-$C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
+$C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.o
 reset_vec CODE 0 0 0 3 2
 end_init CODE 0 C C 3 2
 config CONFIG 4 2007 2007 2 2
@@ -76,25 +76,25 @@ STRING 16E-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\Slave_0.X.production.o
-F cinit CODE >820:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
-F cinit CODE >823:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
-F cinit CODE >870:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
-10 cinit CODE >871:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
-11 cinit CODE >872:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
-12 cinit CODE >873:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
-13 cinit CODE >876:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
-14 cinit CODE >877:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
-15 cinit CODE >878:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
-16 cinit CODE >879:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
-17 cinit CODE >880:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
-18 cinit CODE >881:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
-19 cinit CODE >882:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
-1A cinit CODE >883:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
-1B cinit CODE >884:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
-1C cinit CODE >885:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
-1D cinit CODE >891:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
-1D cinit CODE >893:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
-1E cinit CODE >894:C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.s
+F cinit CODE >820:C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.s
+F cinit CODE >823:C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.s
+F cinit CODE >870:C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.s
+10 cinit CODE >871:C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.s
+11 cinit CODE >872:C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.s
+12 cinit CODE >873:C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.s
+13 cinit CODE >876:C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.s
+14 cinit CODE >877:C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.s
+15 cinit CODE >878:C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.s
+16 cinit CODE >879:C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.s
+17 cinit CODE >880:C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.s
+18 cinit CODE >881:C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.s
+19 cinit CODE >882:C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.s
+1A cinit CODE >883:C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.s
+1B cinit CODE >884:C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.s
+1C cinit CODE >885:C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.s
+1D cinit CODE >891:C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.s
+1D cinit CODE >893:C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.s
+1E cinit CODE >894:C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.s
 4 intentry CODE >67:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
 21 text6 CODE >67:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
 21 text6 CODE >68:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_0.X\newmain.c
@@ -217,20 +217,20 @@ _BF 4A0 0 ABS 0 - dist/default/production\Slave_0.X.production.o
 _RH 77 0 COMMON 1 bssCOMMON dist/default/production\Slave_0.X.production.o
 __Hstrings 0 0 ABS 0 strings -
 _PEIE 5E 0 ABS 0 - dist/default/production\Slave_0.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
+___sp 0 0 STACK 2 stack C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.o
 _main 100 0 CODE 0 maintext dist/default/production\Slave_0.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\Slave_0.X.production.o
-start 18 0 CODE 0 init C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
+start 18 0 CODE 0 init C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.o
 __size_of_main 0 0 ABS 0 - dist/default/production\Slave_0.X.production.o
 __HbssCOMMON 0 0 ABS 0 bssCOMMON -
 __Hpowerup 0 0 CODE 0 powerup -
 __end_of_DHT11_Read 20E 0 CODE 0 text5 dist/default/production\Slave_0.X.production.o
-intlevel0 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.o
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
 _OSCCONbits 8F 0 ABS 0 - dist/default/production\Slave_0.X.production.o
 wtemp0 7E 0 ABS 0 - dist/default/production\Slave_0.X.production.o
@@ -240,8 +240,8 @@ _ANSELH 189 0 ABS 0 - dist/default/production\Slave_0.X.production.o
 _SSPCONbits 14 0 ABS 0 - dist/default/production\Slave_0.X.production.o
 __Lmaintext 0 0 ABS 0 maintext -
 __end_of_startRead 28A 0 CODE 0 text1 dist/default/production\Slave_0.X.production.o
-___stackhi 0 0 ABS 0 - C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
-___stacklo 0 0 ABS 0 - C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
+___stackhi 0 0 ABS 0 - C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.o
+___stacklo 0 0 ABS 0 - C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.o
 __size_of_startRead 0 0 ABS 0 - dist/default/production\Slave_0.X.production.o
 _I2C_Slave_Init 28A 0 CODE 0 text3 dist/default/production\Slave_0.X.production.o
 start_initialization 1E 0 CODE 0 cinit dist/default/production\Slave_0.X.production.o
@@ -255,7 +255,7 @@ _SSPBUF 13 0 ABS 0 - dist/default/production\Slave_0.X.production.o
 _SSPCON 14 0 ABS 0 - dist/default/production\Slave_0.X.production.o
 _TRISC3 43B 0 ABS 0 - dist/default/production\Slave_0.X.production.o
 _TRISC4 43C 0 ABS 0 - dist/default/production\Slave_0.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
+___int_sp 0 0 STACK 2 stack C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -305,7 +305,7 @@ _buffer 7A 0 COMMON 1 bssCOMMON dist/default/production\Slave_0.X.production.o
 saved_w 7E 0 ABS 0 - dist/default/production\Slave_0.X.production.o
 __end_of_isr 100 0 CODE 0 text6 dist/default/production\Slave_0.X.production.o
 __Lintentry 8 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\FERNAN~1\AppData\Local\Temp\xcAscis.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\FERNAN~1\AppData\Local\Temp\xcAs444.o
 __LbssBANK0 0 0 ABS 0 bssBANK0 -
 __end_of_initSETUP 250 0 CODE 0 text2 dist/default/production\Slave_0.X.production.o
 _checkResponse 2BE 0 CODE 0 text4 dist/default/production\Slave_0.X.production.o
