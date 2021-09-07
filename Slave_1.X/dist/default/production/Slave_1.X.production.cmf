@@ -32,7 +32,7 @@ intentry CODE 0 4 4 8 2
 bssBANK0 BANK0 1 2C 2C 5 1
 strings STRING 0 2AB 2AB 17 2
 config CONFIG 4 2007 2007 2 2
-$C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.o
+$C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.o
 reset_vec CODE 0 0 0 3 2
 end_init CODE 0 C C 3 2
 config CONFIG 4 2007 2007 2 2
@@ -82,18 +82,18 @@ STRING 2D5-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\Slave_1.X.production.o
-F cinit CODE >870:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.s
-F cinit CODE >873:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.s
-F cinit CODE >893:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.s
-10 cinit CODE >894:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.s
-11 cinit CODE >895:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.s
-12 cinit CODE >896:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.s
-13 cinit CODE >897:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.s
-14 cinit CODE >898:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.s
-15 cinit CODE >899:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.s
-16 cinit CODE >905:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.s
-16 cinit CODE >907:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.s
-17 cinit CODE >908:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.s
+F cinit CODE >870:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.s
+F cinit CODE >873:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.s
+F cinit CODE >893:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.s
+10 cinit CODE >894:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.s
+11 cinit CODE >895:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.s
+12 cinit CODE >896:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.s
+13 cinit CODE >897:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.s
+14 cinit CODE >898:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.s
+15 cinit CODE >899:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.s
+16 cinit CODE >905:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.s
+16 cinit CODE >907:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.s
+17 cinit CODE >908:C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.s
 4 intentry CODE >71:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_1.X\Slave_1_main.c
 274 text12 CODE >71:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_1.X\Slave_1_main.c
 274 text12 CODE >72:C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_1.X\Slave_1_main.c
@@ -290,13 +290,13 @@ _IOCB 96 0 ABS 0 - dist/default/production\Slave_1.X.production.o
 _PEIE 5E 0 ABS 0 - dist/default/production\Slave_1.X.production.o
 _Unit 30 0 BANK0 1 bssBANK0 dist/default/production\Slave_1.X.production.o
 _WPUB 95 0 ABS 0 - dist/default/production\Slave_1.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.o
+___sp 0 0 STACK 2 stack C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.o
 _dec0 2F 0 BANK0 1 bssBANK0 dist/default/production\Slave_1.X.production.o
 _dec1 2E 0 BANK0 1 bssBANK0 dist/default/production\Slave_1.X.production.o
 _main 11C 0 CODE 0 maintext dist/default/production\Slave_1.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\Slave_1.X.production.o
 _Lcd_Write_Char 4AC 0 CODE 0 text6 dist/default/production\Slave_1.X.production.o
-start 18 0 CODE 0 init C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.o
+start 18 0 CODE 0 init C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.o
 __size_of_main 0 0 ABS 0 - dist/default/production\Slave_1.X.production.o
 __size_of___lwdiv 0 0 ABS 0 - dist/default/production\Slave_1.X.production.o
 Lcd_Port@a 74 0 COMMON 1 cstackCOMMON dist/default/production\Slave_1.X.production.o
@@ -304,12 +304,12 @@ Lcd_Port@a 74 0 COMMON 1 cstackCOMMON dist/default/production\Slave_1.X.producti
 Lcd_Write_Char@temp 77 0 COMMON 1 cstackCOMMON dist/default/production\Slave_1.X.production.o
 _OPTION_REGbits 81 0 ABS 0 - dist/default/production\Slave_1.X.production.o
 __Hpowerup 0 0 CODE 0 powerup -
-intlevel0 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.o
 _OSCCONbits 8F 0 ABS 0 - dist/default/production\Slave_1.X.production.o
 wtemp0 7E 0 ABS 0 - dist/default/production\Slave_1.X.production.o
 __Hfunctab 0 0 ENTRY 0 functab -
@@ -325,8 +325,8 @@ __end_of___wmul 4AC 0 CODE 0 text2 dist/default/production\Slave_1.X.production.
 __Lmaintext 0 0 ABS 0 maintext -
 _str_2_dec 34 0 CODE 0 text1 dist/default/production\Slave_1.X.production.o
 __end_of___lwdiv 39A 0 CODE 0 text3 dist/default/production\Slave_1.X.production.o
-___stackhi 0 0 ABS 0 - C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.o
-___stacklo 0 0 ABS 0 - C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.o
+___stackhi 0 0 ABS 0 - C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.o
+___stacklo 0 0 ABS 0 - C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.o
 ___lwdiv@quotient 20 0 BANK0 1 cstackBANK0 dist/default/production\Slave_1.X.production.o
 Lcd_Set_Cursor@temp 25 0 BANK0 1 cstackBANK0 dist/default/production\Slave_1.X.production.o
 start_initialization 1E 0 CODE 0 cinit dist/default/production\Slave_1.X.production.o
@@ -339,7 +339,7 @@ _SSPCON 14 0 ABS 0 - dist/default/production\Slave_1.X.production.o
 _TRISC3 43B 0 ABS 0 - dist/default/production\Slave_1.X.production.o
 _TRISC4 43C 0 ABS 0 - dist/default/production\Slave_1.X.production.o
 __size_of_Lcd_Cmd 0 0 ABS 0 - dist/default/production\Slave_1.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.o
+___int_sp 0 0 STACK 2 stack C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -394,7 +394,7 @@ __size_of_Lcd_Write_String 0 0 ABS 0 - dist/default/production\Slave_1.X.product
 __stringtab 556 0 STRING 0 strings dist/default/production\Slave_1.X.production.o
 Lcd_Write_String@a 22 0 BANK0 1 cstackBANK0 dist/default/production\Slave_1.X.production.o
 Lcd_Write_String@i 20 0 BANK0 1 cstackBANK0 dist/default/production\Slave_1.X.production.o
-reset_vec 0 0 CODE 0 reset_vec C:\Users\FERNAN~1\AppData\Local\Temp\xcAsg3s.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\FERNAN~1\AppData\Local\Temp\xcAsei8.o
 __size_of_Lcd_Clear 0 0 ABS 0 - dist/default/production\Slave_1.X.production.o
 __end_of_Lcd_Cmd 556 0 CODE 0 text10 dist/default/production\Slave_1.X.production.o
 __size_of___wmul 0 0 ABS 0 - dist/default/production\Slave_1.X.production.o

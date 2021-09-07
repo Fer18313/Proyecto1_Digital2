@@ -2901,7 +2901,7 @@ void I2C_Slave_Init(uint8_t address);
 
 
 
-uint16_t sun_pot=0;
+uint16_t sun_pot;
 uint8_t Unit, dec0, dec1;
 
 void initSETUP(void);

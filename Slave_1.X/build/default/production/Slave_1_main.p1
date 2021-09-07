@@ -413,11 +413,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
 "35 Slave_1_main.c
-[; ;Slave_1_main.c: 35: uint16_t sun_pot=0;
+[; ;Slave_1_main.c: 35: uint16_t sun_pot;
 [v _sun_pot `ui ~T0 @X0 1 e ]
-[i _sun_pot
--> -> 0 `i `ui
-]
 "36
 [; ;Slave_1_main.c: 36: uint8_t Unit, dec0, dec1;
 [v _Unit `uc ~T0 @X0 1 e ]

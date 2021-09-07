@@ -32,7 +32,7 @@
 
 
 // VARIABLES
-uint16_t sun_pot=0;
+uint16_t sun_pot;
 uint8_t Unit, dec0, dec1;
 // PROTOTYPE FUNCTIONS
 void initSETUP(void);
