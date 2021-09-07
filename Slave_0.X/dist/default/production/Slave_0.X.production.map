@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files\Microchip\xc8\v2.32\pic\dat\en_msgs.txt -cn \
   -h+dist/default/production\Slave_0.X.production.sym \
   --cmf=dist/default/production\Slave_0.X.production.cmf -z -Q16F887 \
-  -oC:\Users\FERNAN~1\AppData\Local\Temp\xcAse5g.4 --defsym=__MPLAB_BUILD=1 \
+  -oC:\Users\FERNAN~1\AppData\Local\Temp\xcAs9ag.4 --defsym=__MPLAB_BUILD=1 \
   -Mdist/default/production/Slave_0.X.production.map -E1 -ver=XC8 Compiler \
   --acfsm=1493 -ASTACK=0110h-016Fh -pstack=STACK -ACODE=00h-07FFhx4 \
   -ASTRCODE=00h-01FFFh -ASTRING=00h-0FFhx32 -ACONST=00h-0FFhx32 \
@@ -18,7 +18,7 @@ Linker command line:
   -AEEDATA=00h-0FFh/02100h -peeprom_data=EEDATA -DEEDATA=2 -DCODE=2 \
   -DSTRCODE=2 -DSTRING=2 -DCONST=2 -DENTRY=2 \
   -preset_vec=00h,intentry,init,end_init -ppowerup=CODE -pcinit=CODE \
-  -pfunctab=ENTRY -k C:\Users\FERNAN~1\AppData\Local\Temp\xcAse5g.o \
+  -pfunctab=ENTRY -k C:\Users\FERNAN~1\AppData\Local\Temp\xcAs9ag.o \
   dist/default/production\Slave_0.X.production.o 
 
 Object code version is 3.11
@@ -28,7 +28,7 @@ Machine type is 16F887
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\FERNAN~1\AppData\Local\Temp\xcAse5g.o
+C:\Users\FERNAN~1\AppData\Local\Temp\xcAs9ag.o
                 end_init                              0        0        3        0       0
                 config                             2007     2007        2        0       4
 dist/default/production\Slave_0.X.production.o
@@ -191,7 +191,6 @@ Lcd_Write_Char@temp        cstackCOMMON 0073
 Lcd_Write_Char@y           cstackCOMMON 0074
 Lcd_Write_String@a         cstackCOMMON 0077
 Lcd_Write_String@i         cstackCOMMON 0075
-_ADCON0bits                (abs)        001F
 _ANSEL                     (abs)        0188
 _ANSELH                    (abs)        0189
 _DHT11_Read                text14       0511

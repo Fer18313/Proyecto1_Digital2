@@ -4,9 +4,8 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>I2C.h</itemPath>
       <itemPath>LCD.h</itemPath>
-      <itemPath>adc.h</itemPath>
+      <itemPath>I2C.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -16,9 +15,8 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>I2C.c</itemPath>
-      <itemPath>newmain.c</itemPath>
       <itemPath>LCD.c</itemPath>
-      <itemPath>adc.c</itemPath>
+      <itemPath>Slave_1_main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -1102,10 +1100,6 @@
         <property key="user-pack-device-support" value=""/>
         <property key="wpo-lto" value="false"/>
       </XC8-config-global>
-      <item path="adc.c" ex="true" overriding="false">
-      </item>
-      <item path="adc.h" ex="true" overriding="false">
-      </item>
     </conf>
   </confs>
 </configurationDescriptor>
