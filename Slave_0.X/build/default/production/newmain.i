@@ -2819,7 +2819,7 @@ void initSETUP(void);
 void startRead(void);
 void checkResponse(void);
 char DHT11_Read();
-void configTMR0(void);
+
 
 
 uint8_t buffer;
@@ -2835,11 +2835,6 @@ uint8_t unit0, dec0, unit1, dec1;
 
 void main(void) {
     initSETUP();
-    configTMR0();
-    Lcd_Init();
-    Lcd_Clear();
-    Lcd_Set_Cursor(1,1);
-    Lcd_Write_String(" S1:   S2:   S3:");
     while (1){
         startRead();
         checkResponse();
@@ -2848,30 +2843,43 @@ void main(void) {
         T_Int = DHT11_Read();
         T_Dec = DHT11_Read();
         check_sum = DHT11_Read();
-        if(check_sum == ((RH_Int+RH_Dec+T_Int+T_Dec) & 0XFF))
-            RH = T_Int;
-            Humidity = RH_Int;
-            Lcd_Set_Cursor(2,1);
-            unit0 = 48 + ((Humidity/10) %10);
-            dec0 = 48 + (Humidity %10);
-            unit1 =48 + ((RH / 10) % 10);
-            dec1 = 48 + (RH % 10);
-            Lcd_Write_Char(unit0);
-            Lcd_Write_Char(dec0);
-            Lcd_Write_String("%   ");
-            Lcd_Write_Char(unit1);
-            Lcd_Write_Char(dec1);
-            Lcd_Write_Char("°");
-            Lcd_Write_String("C  ");
-            Lcd_Write_String("000");
-            _delay((unsigned long)((1000)*(8000000/4000.0)));
+        RH = T_Int;
+        Humidity = RH_Int;
+        _delay((unsigned long)((1000)*(8000000/4000.0)));
     }
     return;
 }
+void __attribute__((picinterrupt((""))))isr(void){
+     if(PIR1bits.SSPIF == 1){
+        SSPCONbits.CKP = 0;
+        if ((SSPCONbits.SSPOV) || (SSPCONbits.WCOL)){
+            buffer = SSPBUF;
+            SSPCONbits.SSPOV = 0;
+            SSPCONbits.WCOL = 0;
+            SSPCONbits.CKP = 1;
+        }
+        if(!SSPSTATbits.D_nA && !SSPSTATbits.R_nW) {
+            buffer = SSPBUF;
+            PIR1bits.SSPIF = 0;
+            SSPCONbits.CKP = 1;
+            while(!SSPSTATbits.BF);
+            _delay((unsigned long)((250)*(8000000/4000000.0)));
+        }else if(!SSPSTATbits.D_nA && SSPSTATbits.R_nW){
+            buffer = SSPBUF;
+            BF = 0;
+            SSPBUF = RH;
+            SSPCONbits.CKP = 1;
+            _delay((unsigned long)((250)*(8000000/4000000.0)));
+            while(SSPSTATbits.BF);
+        }
 
+
+        PIR1bits.SSPIF = 0;
+    }
+}
 
 void initSETUP(void){
-    TRISA = 0b00000010;
+    TRISA = 0;
     TRISB = 0;
     TRISC = 0;
     TRISD = 0;
@@ -2881,7 +2889,7 @@ void initSETUP(void){
     PORTB = 0;
     PORTC = 0;
     PORTD = 0;
-    ANSEL = 0b00000010;
+    ANSEL = 0;
     ANSELH = 0;
     OSCCONbits.IRCF2 = 1;
     OSCCONbits.IRCF1 = 1;
@@ -2890,16 +2898,7 @@ void initSETUP(void){
 
     INTCONbits.GIE = 1;
     INTCONbits.PEIE =1;
-    INTCONbits.T0IE = 1;
-    INTCONbits.T0IF =0;
-
-    INTCONbits.RBIE = 1;
-    INTCONbits.RBIF = 0;
-    IOCB = 0b01100000;
-    OPTION_REGbits.nRBPU = 0;
-    WPUB = 0b01100000;
-
-
+    I2C_Slave_Init(0x80);
     return;
 }
 void startRead(){
@@ -2929,14 +2928,4 @@ char DHT11_Read(){
         while(PORTAbits.RA0 & 1);
 }
     return data;
-}
-
-void configTMR0(){
-    OPTION_REGbits.T0CS = 0;
-    OPTION_REGbits.PSA = 0;
-    OPTION_REGbits.PS2 = 1;
-    OPTION_REGbits.PS1 = 1;
-    OPTION_REGbits.PS0 = 1;
-    TMR0 = 217;
-    return;
 }

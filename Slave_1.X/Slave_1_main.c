@@ -32,7 +32,7 @@
 
 
 // VARIABLES
-uint16_t sun_pot;
+uint16_t sun_pot=0;
 uint8_t Unit, dec0, dec1;
 // PROTOTYPE FUNCTIONS
 void initSETUP(void);
@@ -44,13 +44,13 @@ void main(void) {
     Lcd_Clear();  
     Lcd_Set_Cursor(1,1); 
     Lcd_Write_String(" S1:   S2:   S3:");
+    ADCON0bits.GO = 1;
     while(1){
         str_2_dec(sun_pot);
         Lcd_Set_Cursor(2,1);
         Lcd_Write_Char(Unit);
         Lcd_Write_Char(dec0);
         Lcd_Write_Char(dec1);
-        __delay_ms(500);
     }
     return;
 }
@@ -72,7 +72,7 @@ void __interrupt()isr(void){
     if (ADIF == 1){                            
         sun_pot = ADRESH;
         ADIF = 0; //Limpiar la bandera de ADC
-        __delay_us(60);
+        __delay_us(50);
         ADCON0bits.GO = 1; //Inicia la conversión de ADC
     }
 }
@@ -105,13 +105,5 @@ void initSETUP(void){
     // MAIN INTERRUPTIONS
     INTCONbits.GIE = 1;
     INTCONbits.PEIE =1;
-    INTCONbits.T0IE = 1;
-    INTCONbits.T0IF =0;
-    // PORTB INTERRUPT
-    INTCONbits.RBIE = 1;
-    INTCONbits.RBIF = 0;
-    IOCB = 0b01100000; // VALOR DEL PUERTO B
-    OPTION_REGbits.nRBPU = 0; // PARA FACILITARNOS HAREMOS USO DE LA FUNCIONALIDAD DE PULL UP DEL PIC EN EL PUERTO B
-    WPUB = 0b01100000; // VALOR DEL PUERTO B
     return;
 }

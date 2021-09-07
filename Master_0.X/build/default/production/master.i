@@ -2815,7 +2815,73 @@ void I2C_Slave_Init(uint8_t address);
 
 
 
+void initSETUP(void);
+
+
+uint8_t unit0, dec0, unit1, dec1;
+unsigned char Humidity=0;
+unsigned char RH=0;
 
 void main(void) {
+    initSETUP();
+    Lcd_Init();
+    Lcd_Clear();
+    Lcd_Set_Cursor(1,1);
+    Lcd_Write_String(" S1:   S2:   S3:");
+    while(1){
+        I2C_Master_Start();
+        I2C_Master_Write(0x81);
+        RH = I2C_Master_Read(0);
+        I2C_Master_Stop();
+        _delay((unsigned long)((200)*(8000000/4000.0)));
+
+        Lcd_Set_Cursor(2,1);
+        unit0 = 48 + ((Humidity/10) %10);
+        dec0 = 48 + (Humidity %10);
+        unit1 =48 + ((RH / 10) % 10);
+        dec1 = 48 + (RH % 10);
+        Lcd_Write_Char(unit0);
+        Lcd_Write_Char(dec0);
+        Lcd_Write_String("%   ");
+        Lcd_Write_Char(unit1);
+        Lcd_Write_Char(dec1);
+        Lcd_Write_Char("°");
+        Lcd_Write_String("C  ");
+        Lcd_Write_String("000");
+        _delay((unsigned long)((1000)*(8000000/4000.0)));
+    }
+    return;
+}
+
+void initSETUP(void){
+    TRISA = 0b00000001;
+    TRISB = 0;
+    TRISC = 0;
+    TRISD = 0;
+    TRISE = 0;
+    PORTE = 0;
+    PORTA = 0;
+    PORTB = 0;
+    PORTC = 0;
+    PORTD = 0;
+    ANSEL = 0b00000001;
+    ANSELH = 0;
+    OSCCONbits.IRCF2 = 1;
+    OSCCONbits.IRCF1 = 1;
+    OSCCONbits.IRCF0 = 1;
+    OSCCONbits.SCS = 1;
+
+    ADCON1bits.ADFM = 0;
+    ADCON1bits.VCFG0 = 0;
+    ADCON1bits.VCFG1 = 0;
+    ADCON0bits.ADCS = 0b10;
+    ADCON0bits.CHS = 0;
+    ADCON0bits.ADON = 1;
+    _delay((unsigned long)((50)*(8000000/4000000.0)));
+    ADCON0bits.GO = 1;
+
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE =1;
+    I2C_Master_Init(100000);
     return;
 }

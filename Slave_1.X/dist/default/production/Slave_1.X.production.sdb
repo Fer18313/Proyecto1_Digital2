@@ -35,11 +35,11 @@
 [v _Lcd_Write_String Lcd_Write_String `(v  1 e 1 0 ]
 "41 C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_1.X\Slave_1_main.c
 [v _main main `(v  1 e 1 0 ]
-"57
+"58
 [v _str_2_dec str_2_dec `(v  1 e 1 0 ]
-"71
+"72
 [v _isr isr `II(v  1 e 1 0 ]
-"79
+"80
 [v _initSETUP initSETUP `(v  1 e 1 0 ]
 "166 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [v _PORTA PORTA `VEuc  1 e 1 @5 ]
@@ -74,13 +74,13 @@
 [v _SSPCON SSPCON `VEuc  1 e 1 @20 ]
 "1238
 [v _ADRESH ADRESH `VEuc  1 e 1 @30 ]
-[s S156 . 1 `uc 1 ADON 1 0 :1:0 
+[s S146 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :4:2 
 `uc 1 ADCS 1 0 :2:6 
 ]
 "1276
-[s S161 . 1 `uc 1 . 1 0 :1:0 
+[s S151 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
@@ -89,28 +89,14 @@
 `uc 1 ADCS0 1 0 :1:6 
 `uc 1 ADCS1 1 0 :1:7 
 ]
-[s S170 . 1 `uc 1 . 1 0 :1:0 
+[s S160 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 nDONE 1 0 :1:1 
 ]
-[s S173 . 1 `uc 1 . 1 0 :1:0 
+[s S163 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_DONE 1 0 :1:1 
 ]
-[u S176 . 1 `S156 1 . 1 0 `S161 1 . 1 0 `S170 1 . 1 0 `S173 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES176  1 e 1 @31 ]
-[s S288 . 1 `uc 1 PS 1 0 :3:0 
-`uc 1 PSA 1 0 :1:3 
-`uc 1 T0SE 1 0 :1:4 
-`uc 1 T0CS 1 0 :1:5 
-`uc 1 INTEDG 1 0 :1:6 
-`uc 1 nRBPU 1 0 :1:7 
-]
-"1366
-[s S295 . 1 `uc 1 PS0 1 0 :1:0 
-`uc 1 PS1 1 0 :1:1 
-`uc 1 PS2 1 0 :1:2 
-]
-[u S299 . 1 `S288 1 . 1 0 `S295 1 . 1 0 ]
-[v _OPTION_REGbits OPTION_REGbits `VES299  1 e 1 @129 ]
+[u S166 . 1 `S146 1 . 1 0 `S151 1 . 1 0 `S160 1 . 1 0 `S163 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES166  1 e 1 @31 ]
 "1416
 [v _TRISA TRISA `VEuc  1 e 1 @133 ]
 "1478
@@ -165,10 +151,6 @@
 [v _SSPADD SSPADD `VEuc  1 e 1 @147 ]
 "2177
 [v _SSPSTAT SSPSTAT `VEuc  1 e 1 @148 ]
-"2346
-[v _WPUB WPUB `VEuc  1 e 1 @149 ]
-"2416
-[v _IOCB IOCB `VEuc  1 e 1 @150 ]
 [s S240 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 VCFG0 1 0 :1:4 
 `uc 1 VCFG1 1 0 :1:5 
@@ -209,16 +191,16 @@
 "41
 [v _main main `(v  1 e 1 0 ]
 {
-"56
-} 0
 "57
+} 0
+"58
 [v _str_2_dec str_2_dec `(v  1 e 1 0 ]
 {
-"58
+"59
 [v str_2_dec@val_0 val_0 `ui  1 a 2 7 ]
-"57
+"58
 [v str_2_dec@var var `ui  1 p 2 3 ]
-"70
+"71
 } 0
 "15 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
@@ -242,10 +224,10 @@
 [v ___lwdiv@dividend dividend `ui  1 p 2 6 ]
 "30
 } 0
-"79 C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_1.X\Slave_1_main.c
+"80 C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_1.X\Slave_1_main.c
 [v _initSETUP initSETUP `(v  1 e 1 0 ]
 {
-"117
+"110
 } 0
 "77 C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_1.X\LCD.c
 [v _Lcd_Write_String Lcd_Write_String `(v  1 e 1 0 ]
@@ -313,8 +295,8 @@
 [v Lcd_Port@a a `uc  1 a 1 4 ]
 "15
 } 0
-"71 C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_1.X\Slave_1_main.c
+"72 C:\Users\Fernando Sandoval\Desktop\Proyecto1_Digital2\Slave_1.X\Slave_1_main.c
 [v _isr isr `II(v  1 e 1 0 ]
 {
-"78
+"79
 } 0

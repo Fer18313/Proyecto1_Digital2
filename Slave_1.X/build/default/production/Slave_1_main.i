@@ -2901,7 +2901,7 @@ void I2C_Slave_Init(uint8_t address);
 
 
 
-uint16_t sun_pot;
+uint16_t sun_pot=0;
 uint8_t Unit, dec0, dec1;
 
 void initSETUP(void);
@@ -2913,13 +2913,14 @@ void main(void) {
     Lcd_Clear();
     Lcd_Set_Cursor(1,1);
     Lcd_Write_String(" S1:   S2:   S3:");
+    ADCON0bits.GO = 1;
     while(1){
+
         str_2_dec(sun_pot);
         Lcd_Set_Cursor(2,1);
         Lcd_Write_Char(Unit);
         Lcd_Write_Char(dec0);
         Lcd_Write_Char(dec1);
-        _delay((unsigned long)((500)*(8000000/4000.0)));
     }
     return;
 }
@@ -2941,7 +2942,7 @@ void __attribute__((picinterrupt((""))))isr(void){
     if (ADIF == 1){
         sun_pot = ADRESH;
         ADIF = 0;
-        _delay((unsigned long)((60)*(8000000/4000000.0)));
+        _delay((unsigned long)((50)*(8000000/4000000.0)));
         ADCON0bits.GO = 1;
     }
 }
@@ -2974,13 +2975,5 @@ void initSETUP(void){
 
     INTCONbits.GIE = 1;
     INTCONbits.PEIE =1;
-    INTCONbits.T0IE = 1;
-    INTCONbits.T0IF =0;
-
-    INTCONbits.RBIE = 1;
-    INTCONbits.RBIF = 0;
-    IOCB = 0b01100000;
-    OPTION_REGbits.nRBPU = 0;
-    WPUB = 0b01100000;
     return;
 }

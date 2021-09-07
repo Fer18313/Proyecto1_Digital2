@@ -34,7 +34,7 @@ void initSETUP(void);
 void startRead(void);
 void checkResponse(void);
 char DHT11_Read();
-void configTMR0(void);
+
 
 // FUNCTION VARIABLES
 uint8_t buffer;
@@ -50,11 +50,6 @@ uint8_t unit0, dec0, unit1, dec1;
 
 void main(void) {
     initSETUP();
-    configTMR0();
-    Lcd_Init();                     
-    Lcd_Clear();  
-    Lcd_Set_Cursor(1,1); 
-    Lcd_Write_String(" S1:   S2:   S3:");
     while (1){
         startRead();
         checkResponse();
@@ -63,32 +58,43 @@ void main(void) {
         T_Int = DHT11_Read();
         T_Dec = DHT11_Read();
         check_sum = DHT11_Read();
-        if(check_sum == ((RH_Int+RH_Dec+T_Int+T_Dec) & 0XFF))
-            RH = T_Int;   
-            Humidity = RH_Int; 
-            Lcd_Set_Cursor(2,1);             
-            unit0 = 48 + ((Humidity/10) %10);
-            dec0 = 48 + (Humidity %10);
-            unit1 =48 + ((RH / 10) % 10);
-            dec1 = 48 + (RH % 10);
-            Lcd_Write_Char(unit0);
-            Lcd_Write_Char(dec0);
-            Lcd_Write_String("%   ");
-            Lcd_Write_Char(unit1);
-            Lcd_Write_Char(dec1);
-            Lcd_Write_Char("°");
-            Lcd_Write_String("C  "); 
-            Lcd_Write_String("000");
-            __delay_ms(1000);
+        RH = T_Int;   
+        Humidity = RH_Int; 
+        __delay_ms(1000);
     }
     return;
 }
-
+void __interrupt()isr(void){
+     if(PIR1bits.SSPIF == 1){ 
+        SSPCONbits.CKP = 0;     
+        if ((SSPCONbits.SSPOV) || (SSPCONbits.WCOL)){
+            buffer = SSPBUF;    //Lee el valor del buffer y lo agrega a la variable
+            SSPCONbits.SSPOV = 0;       //Se limpia la bandera de overflow
+            SSPCONbits.WCOL = 0;        //Se limpia el bit de colision
+            SSPCONbits.CKP = 1;         //Se habilita SCL
+        }
+        if(!SSPSTATbits.D_nA && !SSPSTATbits.R_nW) {
+            buffer = SSPBUF;     //Lee el valor del buffer y lo agrega a la variable
+            PIR1bits.SSPIF = 0;         //Limpia la bandera de SSP
+            SSPCONbits.CKP = 1;         //Habilita los pulsos del reloj SCL
+            while(!SSPSTATbits.BF);     //Hasta que la recepcion se realice
+            __delay_us(250);
+        }else if(!SSPSTATbits.D_nA && SSPSTATbits.R_nW){
+            buffer = SSPBUF; //Lee el valor del buffer y lo agrega a la variabl
+            BF = 0;
+            SSPBUF = RH;//Escribe el valor de la variable al buffer
+            SSPCONbits.CKP = 1;//Habilita los pulsos del reloj SCL
+            __delay_us(250);
+            while(SSPSTATbits.BF);
+        }
+        PIR1bits.SSPIF = 0;    
+    }
+}
 
 void initSETUP(void){
-    TRISA = 0b00000010;
+    TRISA = 0;
     TRISB = 0;
-    TRISC = 0;
+    TRISC = 0; 
     TRISD = 0;
     TRISE = 0;
     PORTE = 0;
@@ -96,7 +102,7 @@ void initSETUP(void){
     PORTB = 0;
     PORTC = 0;
     PORTD = 0;
-    ANSEL = 0b00000010;
+    ANSEL = 0;
     ANSELH = 0;
     OSCCONbits.IRCF2 = 1; 
     OSCCONbits.IRCF1 = 1;
@@ -105,16 +111,7 @@ void initSETUP(void){
     // MAIN INTERRUPTIONS
     INTCONbits.GIE = 1;
     INTCONbits.PEIE =1;
-    INTCONbits.T0IE = 1;
-    INTCONbits.T0IF =0;
-    // PORTB INTERRUPT
-    INTCONbits.RBIE = 1;
-    INTCONbits.RBIF = 0;
-    IOCB = 0b01100000; // VALOR DEL PUERTO B
-    OPTION_REGbits.nRBPU = 0; // PARA FACILITARNOS HAREMOS USO DE LA FUNCIONALIDAD DE PULL UP DEL PIC EN EL PUERTO B
-    WPUB = 0b01100000; // VALOR DEL PUERTO B
-    
-    
+    I2C_Slave_Init(0x80);
     return;
 }
 void startRead(){
@@ -144,14 +141,4 @@ char DHT11_Read(){
         while(PORTAbits.RA0 & 1);
 }
     return data;
-}
-
-void configTMR0(){
-    OPTION_REGbits.T0CS = 0;  // bit 5  TMR0 Clock Source Select bit...0 = Internal Clock (CLKO) 1 = Transition on T0CKI pin
-    OPTION_REGbits.PSA = 0;   // bit 3  Prescaler Assignment bit...0 = Prescaler is assigned to the Timer0
-    OPTION_REGbits.PS2 = 1;   // bits 2-0  PS2:PS0: Prescaler Rate Select bits
-    OPTION_REGbits.PS1 = 1;
-    OPTION_REGbits.PS0 = 1;
-    TMR0 = 217;     // TMR0 CALCULADO PARA 5 ms
-    return;
 }
