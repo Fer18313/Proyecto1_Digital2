@@ -39,6 +39,8 @@ unsigned char RH=0;
 int LDR = 0;
 uint8_t test =0;
 uint8_t cont = 0;
+
+
 void main(void) {
     initSETUP();
     Lcd_Init();
@@ -63,7 +65,6 @@ void main(void) {
         LDR = I2C_Master_Read(0);
         I2C_Master_Stop();
         __delay_ms(200);
-        
         Lcd_Set_Cursor(2,1);             
         unit0 = 48 + ((Humidity/10) %10);
         dec0 = 48 + (Humidity %10);
@@ -102,7 +103,6 @@ void str_2_dc(uint16_t var){        // Función para obtener vcv decimal
     dec0_12 = (vcv/10);              //Valor del segundo digito
     vcv = (vcv - (dec0_12*10));
     dec1_12 = (vcv);                //Valor del primer digito
-    
     unit0_0 = unit0_0 + 48;          //Conversion a ascii
     dec0_12 = dec0_12 + 48;
     dec1_12 = dec1_12 + 48;
