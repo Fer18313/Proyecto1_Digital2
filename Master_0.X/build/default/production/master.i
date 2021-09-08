@@ -2824,6 +2824,8 @@ unsigned char RH=0;
 int LDR = 0;
 uint8_t test =0;
 uint8_t cont = 0;
+
+
 void main(void) {
     initSETUP();
     Lcd_Init();
@@ -2848,7 +2850,6 @@ void main(void) {
         LDR = I2C_Master_Read(0);
         I2C_Master_Stop();
         _delay((unsigned long)((200)*(8000000/4000.0)));
-
         Lcd_Set_Cursor(2,1);
         unit0 = 48 + ((Humidity/10) %10);
         dec0 = 48 + (Humidity %10);
@@ -2866,16 +2867,31 @@ void main(void) {
         Lcd_Write_Char(dec0_12);
         Lcd_Write_Char(dec1_12);
         Lcd_Write_String("%");
-        if (RH<32){
-            cont++;
+        if (LDR<98){
+            cont=1;
+            PORTAbits.RA0 = 1;
+            _delay((unsigned long)((2000)*(8000000/4000000.0)));
+            PORTAbits.RA0 = 0;
+            _delay((unsigned long)((20)*(8000000/4000.0)));
 
         }
-        else if(RH>32){
-            cont--;
-
-        }
-
-        _delay((unsigned long)((1000)*(8000000/4000.0)));
+        else if(LDR==100){
+            cont=0;
+            PORTAbits.RA0 = 1;
+            _delay((unsigned long)((1000)*(8000000/4000000.0)));
+            PORTAbits.RA0 = 0;
+            _delay((unsigned long)((20)*(8000000/4000.0)));
+            Lcd_Clear();
+            Lcd_Set_Cursor(1,1);
+       Lcd_Write_String("DISPENSANDO");
+       Lcd_Set_Cursor(2,1);
+       Lcd_Write_String(" COMIDA...");
+       _delay((unsigned long)((5000)*(8000000/4000.0)));
+       Lcd_Clear();
+       Lcd_Set_Cursor(1,1);
+       Lcd_Write_String(" RH:   T:   L%:");
+        _delay((unsigned long)((500)*(8000000/4000.0)));
+    }
     }
     return;
 }
@@ -2887,14 +2903,13 @@ void str_2_dc(uint16_t var){
     dec0_12 = (vcv/10);
     vcv = (vcv - (dec0_12*10));
     dec1_12 = (vcv);
-
     unit0_0 = unit0_0 + 48;
     dec0_12 = dec0_12 + 48;
     dec1_12 = dec1_12 + 48;
 
 }
 void initSETUP(void){
-    TRISA = 0b00000001;
+    TRISA = 0b00000000;
     TRISB = 0;
     TRISC = 0;
     TRISD = 0;
@@ -2904,21 +2919,12 @@ void initSETUP(void){
     PORTB = 0;
     PORTC = 0;
     PORTD = 0;
-    ANSEL = 0b00000001;
+    ANSEL = 0;
     ANSELH = 0;
     OSCCONbits.IRCF2 = 1;
     OSCCONbits.IRCF1 = 1;
     OSCCONbits.IRCF0 = 1;
     OSCCONbits.SCS = 1;
-
-    ADCON1bits.ADFM = 0;
-    ADCON1bits.VCFG0 = 0;
-    ADCON1bits.VCFG1 = 0;
-    ADCON0bits.ADCS = 0b10;
-    ADCON0bits.CHS = 0;
-    ADCON0bits.ADON = 1;
-    _delay((unsigned long)((50)*(8000000/4000000.0)));
-    ADCON0bits.GO = 1;
 
     INTCONbits.GIE = 1;
     INTCONbits.PEIE =1;

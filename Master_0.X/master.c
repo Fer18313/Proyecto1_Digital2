@@ -82,16 +82,31 @@ void main(void) {
         Lcd_Write_Char(dec0_12);
         Lcd_Write_Char(dec1_12);
         Lcd_Write_String("%");
-        if (RH<32){
-            cont++;
+        if (LDR<98){
+            cont=1;
+            PORTAbits.RA0 = 1;
+            __delay_us(2000);
+            PORTAbits.RA0 = 0;
+            __delay_ms(20);
        // Lcd_Write_String("000");    
         }
-        else if(RH>32){
-            cont--;
-       // Lcd_Write_String("001");    
-        }
-        
-        __delay_ms(1000);
+        else if(LDR==100){
+            cont=0;
+            PORTAbits.RA0 = 1;
+            __delay_us(1000);
+            PORTAbits.RA0 = 0;
+            __delay_ms(20);
+            Lcd_Clear();
+            Lcd_Set_Cursor(1,1);
+       Lcd_Write_String("DISPENSANDO");
+       Lcd_Set_Cursor(2,1);
+       Lcd_Write_String(" COMIDA...");
+       __delay_ms(5000);
+       Lcd_Clear();
+       Lcd_Set_Cursor(1,1);
+       Lcd_Write_String(" RH:   T:   L%:");
+        __delay_ms(500);
+    }
     }
     return;
 }
@@ -109,7 +124,7 @@ void str_2_dc(uint16_t var){        // Función para obtener vcv decimal
     
 }
 void initSETUP(void){
-    TRISA = 0b00000001;
+    TRISA = 0b00000000;
     TRISB = 0;
     TRISC = 0;
     TRISD = 0;
@@ -119,21 +134,12 @@ void initSETUP(void){
     PORTB = 0;
     PORTC = 0;
     PORTD = 0;
-    ANSEL = 0b00000001;
+    ANSEL = 0;
     ANSELH = 0;
     OSCCONbits.IRCF2 = 1; 
     OSCCONbits.IRCF1 = 1;
     OSCCONbits.IRCF0 = 1;
     OSCCONbits.SCS = 1;
-    //ADC CONFIG
-    ADCON1bits.ADFM = 0; //Justificar a la izquierda
-    ADCON1bits.VCFG0 = 0; //Vss
-    ADCON1bits.VCFG1 = 0; //VDD
-    ADCON0bits.ADCS = 0b10; //ADC oscilador -> Fosc/32
-    ADCON0bits.CHS = 0;     //Comenzar en canal 0       
-    ADCON0bits.ADON = 1;    //Habilitar la conversión ADC
-    __delay_us(50); 
-    ADCON0bits.GO = 1;
     // MAIN INTERRUPTIONS
     INTCONbits.GIE = 1;
     INTCONbits.PEIE =1;
