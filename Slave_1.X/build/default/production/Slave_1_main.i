@@ -2918,10 +2918,8 @@ void main(void) {
     Lcd_Write_String(" S1:   S2:   S3:");
     ADCON0bits.GO = 1;
     while(1){
-        an_sun = (48.8758*sun_pot)/(5.0-(0.00488758*sun_pot));
-        LDR = an_sun;
         Lcd_Set_Cursor(2,1);
-        Lcd_Write_Char(an_sun);
+
         _delay((unsigned long)((500)*(8000000/4000.0)));
     }
     return;
@@ -2930,8 +2928,6 @@ void main(void) {
 void __attribute__((picinterrupt((""))))isr(void){
     if (ADIF == 1){
         sun_pot = ADRESH;
-        sun_pot = sun_pot <<8;
-        sun_pot |= ADRESL;
         ADIF = 0;
         _delay((unsigned long)((50)*(8000000/4000000.0)));
         ADCON0bits.GO = 1;

@@ -66,9 +66,15 @@ void main(void) {
         Lcd_Write_String("%   ");
         Lcd_Write_Char(unit1);
         Lcd_Write_Char(dec1);
-        Lcd_Write_Char("°");
-        Lcd_Write_String("C  "); 
-        Lcd_Write_String("000");
+        Lcd_Write_Char(223);
+        Lcd_Write_String("C  ");
+        if (RH<32){
+        Lcd_Write_String("000");    
+        }
+        else if(RH>32){
+        Lcd_Write_String("001");    
+        }
+        
         __delay_ms(1000);
     }
     return;

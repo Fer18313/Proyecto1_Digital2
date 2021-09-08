@@ -2838,7 +2838,7 @@ void main(void) {
                 else if (test==1){
                 Humidity=I2C_Master_Read(0);
                 test = 0;
-                }
+            }
         I2C_Master_Stop();
         _delay((unsigned long)((200)*(8000000/4000.0)));
         Lcd_Set_Cursor(2,1);
@@ -2851,9 +2851,15 @@ void main(void) {
         Lcd_Write_String("%   ");
         Lcd_Write_Char(unit1);
         Lcd_Write_Char(dec1);
-        Lcd_Write_Char("°");
+        Lcd_Write_Char(223);
         Lcd_Write_String("C  ");
+        if (RH<32){
         Lcd_Write_String("000");
+        }
+        else if(RH>32){
+        Lcd_Write_String("001");
+        }
+
         _delay((unsigned long)((1000)*(8000000/4000.0)));
     }
     return;

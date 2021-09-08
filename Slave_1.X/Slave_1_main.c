@@ -32,11 +32,7 @@
 
 
 // VARIABLES
-unsigned int sun_pot=0;
-float an_sun=0;
-unsigned long LDR=0;
-unsigned char buffer[16];
-//uint8_t Unit, dec0, dec1;
+
 
 // PROTOTYPE FUNCTIONS
 void initSETUP(void);
@@ -49,24 +45,15 @@ void main(void) {
     Lcd_Write_String(" S1:   S2:   S3:");
     ADCON0bits.GO = 1;
     while(1){
-        an_sun = (48.8758*sun_pot)/(5.0-(0.00488758*sun_pot));
-        LDR = an_sun;
         Lcd_Set_Cursor(2,1);
-        Lcd_Write_Char(an_sun);
+        
         __delay_ms(500);
     }
     return;
 }
 
 void __interrupt()isr(void){
-    if (ADIF == 1){                            
-        sun_pot = ADRESH;
-        sun_pot = sun_pot <<8;
-        sun_pot |= ADRESL;
-        ADIF = 0; //Limpiar la bandera de ADC
-        __delay_us(50);
-        ADCON0bits.GO = 1; //Inicia la conversión de ADC
-    }
+    
 }
 void initSETUP(void){
     TRISA = 0b00000001;
@@ -85,15 +72,6 @@ void initSETUP(void){
     OSCCONbits.IRCF1 = 1;
     OSCCONbits.IRCF0 = 1;
     OSCCONbits.SCS = 1;
-    //ADC CONFIG
-    ADCON1bits.ADFM = 0; //Justificar a la izquierda
-    ADCON1bits.VCFG0 = 0; //Vss
-    ADCON1bits.VCFG1 = 0; //VDD
-    ADCON0bits.ADCS = 0b10; //ADC oscilador -> Fosc/32
-    ADCON0bits.CHS = 0;     //Comenzar en canal 0       
-    ADCON0bits.ADON = 1;    //Habilitar la conversión ADC
-    __delay_us(50); 
-    ADCON0bits.GO = 1;
     // MAIN INTERRUPTIONS
     INTCONbits.GIE = 1;
     INTCONbits.PEIE =1;
