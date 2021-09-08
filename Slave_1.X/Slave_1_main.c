@@ -32,27 +32,71 @@
 
 
 // VARIABLES
+uint16_t ADCread=0;
+float supply;
+int LDR;
+uint8_t vcv,unit0,dec0,dec1,buffer;
 
-
-// PROTOTYPE FUNCTIONS
+//PROTOTYPE FUNCTIONS
 void initSETUP(void);
+void str_2_dc(uint16_t var);
 
 void main(void) {
     initSETUP();
-    Lcd_Init();                     
-    Lcd_Clear();  
-    Lcd_Set_Cursor(1,1); 
-    Lcd_Write_String(" S1:   S2:   S3:");
     ADCON0bits.GO = 1;
     while(1){
-        Lcd_Set_Cursor(2,1);
-        
-        __delay_ms(500);
+        supply = 5.0*ADCread/1024.0;
+        LDR = (100*supply)/1.185;
+        __delay_ms(50);
     }
     return;
 }
 
 void __interrupt()isr(void){
+    if (PIR1bits.ADIF == 1){                            
+        ADCread = ADRESH;
+        PIR1bits.ADIF = 0; //Limpiar la bandera de ADC
+        __delay_us(60);
+        ADCON0bits.GO = 1; //Inicia la conversión de ADC
+    }
+    if(PIR1bits.SSPIF == 1){ 
+        SSPCONbits.CKP = 0;     
+        if ((SSPCONbits.SSPOV) || (SSPCONbits.WCOL)){
+            buffer = SSPBUF;    //Lee el valor del buffer y lo agrega a la variable
+            SSPCONbits.SSPOV = 0;       //Se limpia la bandera de overflow
+            SSPCONbits.WCOL = 0;        //Se limpia el bit de colision
+            SSPCONbits.CKP = 1;         //Se habilita SCL
+        }
+        if(!SSPSTATbits.D_nA && !SSPSTATbits.R_nW) {
+            buffer = SSPBUF;     //Lee el valor del buffer y lo agrega a la variable
+            PIR1bits.SSPIF = 0;         //Limpia la bandera de SSP
+            SSPCONbits.CKP = 1;         //Habilita los pulsos del reloj SCL
+            while(!SSPSTATbits.BF);     //Hasta que la recepcion se realice
+            __delay_us(250);
+        }else if(!SSPSTATbits.D_nA && SSPSTATbits.R_nW){
+            buffer = SSPBUF; //Lee el valor del buffer y lo agrega a la variabl
+            BF = 0;
+            SSPBUF = LDR;
+            SSPCONbits.CKP = 1;//Habilita los pulsos del reloj SCL
+            __delay_us(250);
+            while(SSPSTATbits.BF);
+        }
+        PIR1bits.SSPIF = 0;    
+    }
+}
+
+void str_2_dc(uint16_t var){        // Función para obtener vcv decimal
+    uint16_t vcv;
+    vcv = var;                  
+    unit0 = (vcv/100) ;                //Valor del tercer digito
+    vcv = (vcv - (unit0*100));
+    dec0 = (vcv/10);              //Valor del segundo digito
+    vcv = (vcv - (dec0*10));
+    dec1 = (vcv);                //Valor del primer digito
+    
+    unit0 = unit0 + 48;          //Conversion a ascii
+    dec0 = dec0 + 48;
+    dec1 = dec1 + 48;
     
 }
 void initSETUP(void){
@@ -68,6 +112,17 @@ void initSETUP(void){
     PORTD = 0;
     ANSEL = 0b00000001;
     ANSELH = 0;
+    ADCON1bits.ADFM = 0; //Justificar a la izquierda
+    ADCON1bits.VCFG0 = 0; //Vss
+    ADCON1bits.VCFG1 = 0; //VDD
+
+    ADCON0bits.ADCS = 0b10; //ADC oscilador -> Fosc/32
+    ADCON0bits.CHS = 0;     //Comenzar en canal 0       
+    ADCON0bits.ADON = 1;    //Habilitar la conversión ADC
+    __delay_us(50); 
+    ADCON0bits.GO = 1;
+    PIE1bits.ADIE = 1;   //Enable interrupción ADC
+    PIR1bits.ADIF = 0;   //Se limpia bandera de interrupción ADC
     OSCCONbits.IRCF2 = 1; 
     OSCCONbits.IRCF1 = 1;
     OSCCONbits.IRCF0 = 1;
@@ -75,5 +130,6 @@ void initSETUP(void){
     // MAIN INTERRUPTIONS
     INTCONbits.GIE = 1;
     INTCONbits.PEIE =1;
+    I2C_Slave_Init(0x60);
     return;
 }

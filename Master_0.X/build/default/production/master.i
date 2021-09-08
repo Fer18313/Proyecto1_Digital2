@@ -2816,18 +2816,20 @@ void I2C_Slave_Init(uint8_t address);
 
 
 void initSETUP(void);
+void str_2_dc(uint16_t var);
 
-
-uint8_t unit0, dec0, unit1, dec1;
+uint8_t unit0, dec0, unit1, dec1, unit0_0, dec0_12,dec1_12;
 unsigned char Humidity=0;
 unsigned char RH=0;
+int LDR = 0;
 uint8_t test =0;
+uint8_t cont = 0;
 void main(void) {
     initSETUP();
     Lcd_Init();
     Lcd_Clear();
     Lcd_Set_Cursor(1,1);
-    Lcd_Write_String(" S1:   S2:   S3:");
+    Lcd_Write_String(" RH:   T:   L%:");
     while(1){
         I2C_Master_Start();
         I2C_Master_Write(0x81);
@@ -2841,6 +2843,12 @@ void main(void) {
             }
         I2C_Master_Stop();
         _delay((unsigned long)((200)*(8000000/4000.0)));
+        I2C_Master_Start();
+        I2C_Master_Write(0x61);
+        LDR = I2C_Master_Read(0);
+        I2C_Master_Stop();
+        _delay((unsigned long)((200)*(8000000/4000.0)));
+
         Lcd_Set_Cursor(2,1);
         unit0 = 48 + ((Humidity/10) %10);
         dec0 = 48 + (Humidity %10);
@@ -2853,18 +2861,38 @@ void main(void) {
         Lcd_Write_Char(dec1);
         Lcd_Write_Char(223);
         Lcd_Write_String("C  ");
+        str_2_dc(LDR);
+        Lcd_Write_Char(unit0_0);
+        Lcd_Write_Char(dec0_12);
+        Lcd_Write_Char(dec1_12);
+        Lcd_Write_String("%");
         if (RH<32){
-        Lcd_Write_String("000");
+            cont++;
+
         }
         else if(RH>32){
-        Lcd_Write_String("001");
+            cont--;
+
         }
 
         _delay((unsigned long)((1000)*(8000000/4000.0)));
     }
     return;
 }
+void str_2_dc(uint16_t var){
+    uint16_t vcv;
+    vcv = var;
+    unit0_0 = (vcv/100) ;
+    vcv = (vcv - (unit0_0*100));
+    dec0_12 = (vcv/10);
+    vcv = (vcv - (dec0_12*10));
+    dec1_12 = (vcv);
 
+    unit0_0 = unit0_0 + 48;
+    dec0_12 = dec0_12 + 48;
+    dec1_12 = dec1_12 + 48;
+
+}
 void initSETUP(void){
     TRISA = 0b00000001;
     TRISB = 0;

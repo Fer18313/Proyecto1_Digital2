@@ -31,18 +31,20 @@
 
 // FUNCTION PROTOTYPES
 void initSETUP(void);
-
+void str_2_dc(uint16_t var);
 // VARIABLES
-uint8_t unit0, dec0, unit1, dec1;
+uint8_t unit0, dec0, unit1, dec1, unit0_0, dec0_12,dec1_12;
 unsigned char Humidity=0;
 unsigned char RH=0;
+int LDR = 0;
 uint8_t test =0;
+uint8_t cont = 0;
 void main(void) {
     initSETUP();
     Lcd_Init();
     Lcd_Clear();
     Lcd_Set_Cursor(1,1);
-    Lcd_Write_String(" S1:   S2:   S3:");
+    Lcd_Write_String(" RH:   T:   L%:");
     while(1){
         I2C_Master_Start();         //Se inicializa la comunicacion I2C
         I2C_Master_Write(0x81);     //first slave
@@ -56,6 +58,12 @@ void main(void) {
             }
         I2C_Master_Stop();          //Termina la comunicacion 
         __delay_ms(200);
+        I2C_Master_Start();
+        I2C_Master_Write(0x61);
+        LDR = I2C_Master_Read(0);
+        I2C_Master_Stop();
+        __delay_ms(200);
+        
         Lcd_Set_Cursor(2,1);             
         unit0 = 48 + ((Humidity/10) %10);
         dec0 = 48 + (Humidity %10);
@@ -68,18 +76,38 @@ void main(void) {
         Lcd_Write_Char(dec1);
         Lcd_Write_Char(223);
         Lcd_Write_String("C  ");
+        str_2_dc(LDR);
+        Lcd_Write_Char(unit0_0);
+        Lcd_Write_Char(dec0_12);
+        Lcd_Write_Char(dec1_12);
+        Lcd_Write_String("%");
         if (RH<32){
-        Lcd_Write_String("000");    
+            cont++;
+       // Lcd_Write_String("000");    
         }
         else if(RH>32){
-        Lcd_Write_String("001");    
+            cont--;
+       // Lcd_Write_String("001");    
         }
         
         __delay_ms(1000);
     }
     return;
 }
-
+void str_2_dc(uint16_t var){        // Función para obtener vcv decimal
+    uint16_t vcv;
+    vcv = var;                  
+    unit0_0 = (vcv/100) ;                //Valor del tercer digito
+    vcv = (vcv - (unit0_0*100));
+    dec0_12 = (vcv/10);              //Valor del segundo digito
+    vcv = (vcv - (dec0_12*10));
+    dec1_12 = (vcv);                //Valor del primer digito
+    
+    unit0_0 = unit0_0 + 48;          //Conversion a ascii
+    dec0_12 = dec0_12 + 48;
+    dec1_12 = dec1_12 + 48;
+    
+}
 void initSETUP(void){
     TRISA = 0b00000001;
     TRISB = 0;

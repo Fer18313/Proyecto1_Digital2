@@ -2901,37 +2901,72 @@ void I2C_Slave_Init(uint8_t address);
 
 
 
-unsigned int sun_pot=0;
-float an_sun=0;
-unsigned long LDR=0;
-unsigned char buffer[16];
-
+uint16_t ADCread=0;
+float supply;
+int LDR;
+uint8_t vcv,unit0,dec0,dec1,buffer;
 
 
 void initSETUP(void);
+void str_2_dc(uint16_t var);
 
 void main(void) {
     initSETUP();
-    Lcd_Init();
-    Lcd_Clear();
-    Lcd_Set_Cursor(1,1);
-    Lcd_Write_String(" S1:   S2:   S3:");
     ADCON0bits.GO = 1;
     while(1){
-        Lcd_Set_Cursor(2,1);
-
-        _delay((unsigned long)((500)*(8000000/4000.0)));
+        supply = 5.0*ADCread/1024.0;
+        LDR = (100*supply)/1.185;
+        _delay((unsigned long)((50)*(8000000/4000.0)));
     }
     return;
 }
 
 void __attribute__((picinterrupt((""))))isr(void){
-    if (ADIF == 1){
-        sun_pot = ADRESH;
-        ADIF = 0;
-        _delay((unsigned long)((50)*(8000000/4000000.0)));
+    if (PIR1bits.ADIF == 1){
+        ADCread = ADRESH;
+        PIR1bits.ADIF = 0;
+        _delay((unsigned long)((60)*(8000000/4000000.0)));
         ADCON0bits.GO = 1;
     }
+    if(PIR1bits.SSPIF == 1){
+        SSPCONbits.CKP = 0;
+        if ((SSPCONbits.SSPOV) || (SSPCONbits.WCOL)){
+            buffer = SSPBUF;
+            SSPCONbits.SSPOV = 0;
+            SSPCONbits.WCOL = 0;
+            SSPCONbits.CKP = 1;
+        }
+        if(!SSPSTATbits.D_nA && !SSPSTATbits.R_nW) {
+            buffer = SSPBUF;
+            PIR1bits.SSPIF = 0;
+            SSPCONbits.CKP = 1;
+            while(!SSPSTATbits.BF);
+            _delay((unsigned long)((250)*(8000000/4000000.0)));
+        }else if(!SSPSTATbits.D_nA && SSPSTATbits.R_nW){
+            buffer = SSPBUF;
+            BF = 0;
+            SSPBUF = LDR;
+            SSPCONbits.CKP = 1;
+            _delay((unsigned long)((250)*(8000000/4000000.0)));
+            while(SSPSTATbits.BF);
+        }
+        PIR1bits.SSPIF = 0;
+    }
+}
+
+void str_2_dc(uint16_t var){
+    uint16_t vcv;
+    vcv = var;
+    unit0 = (vcv/100) ;
+    vcv = (vcv - (unit0*100));
+    dec0 = (vcv/10);
+    vcv = (vcv - (dec0*10));
+    dec1 = (vcv);
+
+    unit0 = unit0 + 48;
+    dec0 = dec0 + 48;
+    dec1 = dec1 + 48;
+
 }
 void initSETUP(void){
     TRISA = 0b00000001;
@@ -2946,21 +2981,24 @@ void initSETUP(void){
     PORTD = 0;
     ANSEL = 0b00000001;
     ANSELH = 0;
-    OSCCONbits.IRCF2 = 1;
-    OSCCONbits.IRCF1 = 1;
-    OSCCONbits.IRCF0 = 1;
-    OSCCONbits.SCS = 1;
-
     ADCON1bits.ADFM = 0;
     ADCON1bits.VCFG0 = 0;
     ADCON1bits.VCFG1 = 0;
+
     ADCON0bits.ADCS = 0b10;
     ADCON0bits.CHS = 0;
     ADCON0bits.ADON = 1;
     _delay((unsigned long)((50)*(8000000/4000000.0)));
     ADCON0bits.GO = 1;
+    PIE1bits.ADIE = 1;
+    PIR1bits.ADIF = 0;
+    OSCCONbits.IRCF2 = 1;
+    OSCCONbits.IRCF1 = 1;
+    OSCCONbits.IRCF0 = 1;
+    OSCCONbits.SCS = 1;
 
     INTCONbits.GIE = 1;
     INTCONbits.PEIE =1;
+    I2C_Slave_Init(0x60);
     return;
 }
