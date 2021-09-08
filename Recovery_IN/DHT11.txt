@@ -1,0 +1,156 @@
+/*
+ * File:   main.c
+ * Author: Fernando Sandoval
+ * Carne: 18313
+ * Created on August 31, 2021, 10:02 PM
+ */
+
+// CONFIG1
+#pragma config FOSC = INTRC_NOCLKOUT// Oscillator Selection bits (INTOSCIO oscillator: I/O function on RA6/OSC2/CLKOUT pin, I/O function on RA7/OSC1/CLKIN)
+#pragma config WDTE = OFF       // Watchdog Timer Enable bit (WDT disabled and can be enabled by SWDTEN bit of the WDTCON register)
+#pragma config PWRTE = OFF      // Power-up Timer Enable bit (PWRT disabled)
+#pragma config MCLRE = OFF      // RE3/MCLR pin function select bit (RE3/MCLR pin function is digital input, MCLR internally tied to VDD)
+#pragma config CP = OFF         // Code Protection bit (Program memory code protection is disabled)
+#pragma config CPD = OFF        // Data Code Protection bit (Data memory code protection is disabled)
+#pragma config BOREN = OFF      // Brown Out Reset Selection bits (BOR disabled)
+#pragma config IESO = OFF       // Internal External Switchover bit (Internal/External Switchover mode is disabled)
+#pragma config FCMEN = OFF      // Fail-Safe Clock Monitor Enabled bit (Fail-Safe Clock Monitor is disabled)
+#pragma config LVP = OFF        // Low Voltage Programming Enable bit (RB3 pin has digital I/O, HV on MCLR must be used for programming)
+
+// CONFIG2
+#pragma config BOR4V = BOR40V   // Brown-out Reset Selection bit (Brown-out Reset set to 4.0V)
+#pragma config WRT = OFF        // Flash Program Memory Self Write Enable bits (Write protection off)
+// LIBRERIAS
+#include <xc.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <pic16f887.h>
+#include "LCD.h"
+#include "I2C.h"
+#define _XTAL_FREQ 8000000
+
+// FUNCTION PROTOTYPES
+void initSETUP(void);
+void startRead(void);
+void checkResponse(void);
+char DHT11_Read();
+void configTMR0(void);
+
+// FUNCTION VARIABLES
+uint8_t buffer;
+unsigned char RH_Dec;
+unsigned char RH_Int;
+unsigned char T_Dec;
+unsigned char T_Int;
+unsigned char Humidity, RH;
+unsigned char check_sum;
+uint8_t unit0, dec0, unit1, dec1;
+
+
+
+void main(void) {
+    initSETUP();
+    configTMR0();
+    Lcd_Init();                     
+    Lcd_Clear();  
+    Lcd_Set_Cursor(1,1); 
+    Lcd_Write_String(" S1:   S2:   S3:");
+    while (1){
+        startRead();
+        checkResponse();
+        RH_Int = DHT11_Read();
+        RH_Dec = DHT11_Read();
+        T_Int = DHT11_Read();
+        T_Dec = DHT11_Read();
+        check_sum = DHT11_Read();
+            RH = T_Int;   
+            Humidity = RH_Int; 
+            Lcd_Set_Cursor(2,1);             
+            unit0 = 48 + ((Humidity/10) %10);
+            dec0 = 48 + (Humidity %10);
+            unit1 =48 + ((RH / 10) % 10);
+            dec1 = 48 + (RH % 10);
+            Lcd_Write_Char(unit0);
+            Lcd_Write_Char(dec0);
+            Lcd_Write_String("%   ");
+            Lcd_Write_Char(unit1);
+            Lcd_Write_Char(dec1);
+            Lcd_Write_Char("°");
+            Lcd_Write_String("C  "); 
+            Lcd_Write_String("000");
+            __delay_ms(1000);
+    }
+    return;
+}
+
+
+void initSETUP(void){
+    TRISA = 0b00000010;
+    TRISB = 0;
+    TRISC = 0;
+    TRISD = 0;
+    TRISE = 0;
+    PORTE = 0;
+    PORTA = 0;
+    PORTB = 0;
+    PORTC = 0;
+    PORTD = 0;
+    ANSEL = 0b00000010;
+    ANSELH = 0;
+    OSCCONbits.IRCF2 = 1; 
+    OSCCONbits.IRCF1 = 1;
+    OSCCONbits.IRCF0 = 1;
+    OSCCONbits.SCS = 1;
+    // MAIN INTERRUPTIONS
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE =1;
+    INTCONbits.T0IE = 1;
+    INTCONbits.T0IF =0;
+    // PORTB INTERRUPT
+    INTCONbits.RBIE = 1;
+    INTCONbits.RBIF = 0;
+    IOCB = 0b01100000; // VALOR DEL PUERTO B
+    OPTION_REGbits.nRBPU = 0; // PARA FACILITARNOS HAREMOS USO DE LA FUNCIONALIDAD DE PULL UP DEL PIC EN EL PUERTO B
+    WPUB = 0b01100000; // VALOR DEL PUERTO B
+    
+    
+    return;
+}
+void startRead(){
+    TRISA = 0b00000010;
+    PORTAbits.RA0 = 0;
+    __delay_ms(18);
+    PORTAbits.RA0 = 1;
+    __delay_us(30);
+    TRISA= 0b00000011;
+}
+
+void checkResponse(){
+    while (PORTAbits.RA0 & 1);
+    while (!(PORTAbits.RA0 & 1));
+    while (PORTAbits.RA0 & 1);
+}
+
+char DHT11_Read(){
+    char i,data = 0;
+    for (i=0; i<8; i++){
+        while(!(PORTAbits.RA0 & 1));
+        __delay_us(30);
+        if(PORTAbits.RA0 & 1)
+            data = ((data<<1) | 1);
+        else
+            data = (data<<1);
+        while(PORTAbits.RA0 & 1);
+}
+    return data;
+}
+
+void configTMR0(){
+    OPTION_REGbits.T0CS = 0;  // bit 5  TMR0 Clock Source Select bit...0 = Internal Clock (CLKO) 1 = Transition on T0CKI pin
+    OPTION_REGbits.PSA = 0;   // bit 3  Prescaler Assignment bit...0 = Prescaler is assigned to the Timer0
+    OPTION_REGbits.PS2 = 1;   // bits 2-0  PS2:PS0: Prescaler Rate Select bits
+    OPTION_REGbits.PS1 = 1;
+    OPTION_REGbits.PS0 = 1;
+    TMR0 = 217;     // TMR0 CALCULADO PARA 5 ms
+    return;
+}

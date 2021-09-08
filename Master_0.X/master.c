@@ -27,6 +27,7 @@
 #include <pic16f887.h>
 #include "LCD.h"
 #include "I2C.h"
+#include "USART.h"
 #define _XTAL_FREQ 8000000
 
 // FUNCTION PROTOTYPES
@@ -41,6 +42,8 @@ unsigned char RH=0;
 int LDR = 0;
 uint8_t test =0;
 uint8_t cont = 0,cont1 = 0;
+uint8_t F1=0; 
+uint8_t counter, tempRX;
 
 
 void main(void) {
@@ -158,6 +161,29 @@ void main(void) {
 }
 
 
+
+void __interrupt()isr(void){
+    if(PIR1bits.RCIF == 1){
+        tempRX = RCREG;
+        if(tempRX ==0x00){
+           if (PIR1bits.TXIF == 1){
+        switch(F1){
+            case 0:
+                TXREG = unit0;  // 48 MEANS ASCII FOR ZERO.
+                F1 = 1;
+                break;
+            case 1:
+                TXREG = dec0;
+                F1 = 0;
+                break;
+        }
+        PIR1bits.RCIF = 0;
+        TXIF=0;
+    } 
+        }
+    
+}
+}
 void str_2_dc(uint16_t var){       // PARA PODER OBTENER EL VALOR EN DECIMAL
     uint16_t vcv;
     vcv = var;                  
@@ -178,7 +204,7 @@ void str_2_dc(uint16_t var){       // PARA PODER OBTENER EL VALOR EN DECIMAL
 void initSETUP(void){
     TRISA = 0; // SERVO y BOMBA DE AGUA
     TRISB = 0;
-    TRISC = 0;
+    TRISC = 0b11000000;
     TRISD = 0;
     TRISE = 0;
     PORTE = 0;
@@ -192,6 +218,15 @@ void initSETUP(void){
     OSCCONbits.IRCF1 = 1;
     OSCCONbits.IRCF0 = 1;
     OSCCONbits.SCS = 1;
+    TXSTAbits.SYNC = 0;
+    TXSTAbits.BRGH = 1;
+    BAUDCTLbits.BRG16 = 1;
+    SPBRG = 207;
+    SPBRGH = 0;
+    RCSTAbits.SPEN = 1;
+    RCSTAbits.RX9 = 0;
+    RCSTAbits.CREN = 1; 
+    TXSTAbits.TXEN = 1; 
     // MAIN INTERRUPTIONS
     INTCONbits.GIE = 1;
     INTCONbits.PEIE =1;

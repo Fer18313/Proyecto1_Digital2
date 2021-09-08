@@ -1,4 +1,4 @@
-# 1 "master.c"
+# 1 "USART.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,31 +6,15 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "master.c" 2
+# 1 "USART.c" 2
 
 
 
 
 
 
-
-
-#pragma config FOSC = INTRC_NOCLKOUT
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config MCLRE = OFF
-#pragma config CP = OFF
-#pragma config CPD = OFF
-#pragma config BOREN = OFF
-#pragma config IESO = OFF
-#pragma config FCMEN = OFF
-#pragma config LVP = OFF
-
-
-#pragma config BOR4V = BOR40V
-#pragma config WRT = OFF
-
-
+# 1 "./USART.h" 1
+# 11 "./USART.h"
 # 1 "C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2511,7 +2495,8 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 24 "master.c" 2
+# 11 "./USART.h" 2
+
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdint.h" 3
@@ -2646,373 +2631,18 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 25 "master.c" 2
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdio.h" 1 3
-
-
-
-# 1 "C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\__size_t.h" 1 3
-
-
-
-typedef unsigned size_t;
-# 4 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdio.h" 2 3
-
-# 1 "C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\__null.h" 1 3
-# 5 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdio.h" 2 3
-
-
-
-
-
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdarg.h" 1 3
-
-
-
-
-
-
-typedef void * va_list[1];
-
-#pragma intrinsic(__va_start)
-extern void * __va_start(void);
-
-#pragma intrinsic(__va_arg)
-extern void * __va_arg(void *, ...);
-# 11 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdio.h" 2 3
-# 43 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdio.h" 3
-struct __prbuf
-{
- char * ptr;
- void (* func)(char);
-};
-# 85 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdio.h" 3
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\conio.h" 1 3
-
-
-
-
-
-
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\errno.h" 1 3
-# 29 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\errno.h" 3
-extern int errno;
-# 8 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\conio.h" 2 3
-
-
-
-
-extern void init_uart(void);
-
-extern char getch(void);
-extern char getche(void);
-extern void putch(char);
-extern void ungetch(char);
-
-extern __bit kbhit(void);
-
-
-
-extern char * cgets(char *);
-extern void cputs(const char *);
-# 85 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdio.h" 2 3
-
-
-
-extern int cprintf(char *, ...);
-#pragma printf_check(cprintf)
-
-
-
-extern int _doprnt(struct __prbuf *, const register char *, register va_list);
-# 180 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdio.h" 3
-#pragma printf_check(vprintf) const
-#pragma printf_check(vsprintf) const
-
-extern char * gets(char *);
-extern int puts(const char *);
-extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
-extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
-extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
-extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
-extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
-extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
-
-#pragma printf_check(printf) const
-#pragma printf_check(sprintf) const
-extern int sprintf(char *, const char *, ...);
-extern int printf(const char *, ...);
-# 26 "master.c" 2
-
-
-# 1 "./LCD.h" 1
-# 64 "./LCD.h"
-void Lcd_Port(char a);
-
-void Lcd_Cmd(char a);
-
-void Lcd_Clear(void);
-
-void Lcd_Set_Cursor(char a, char b);
-
-void Lcd_Init(void);
-
-void Lcd_Write_Char(char a);
-
-void Lcd_Write_String(char *a);
-
-void Lcd_Shift_Right(void);
-
-void Lcd_Shift_Left(void);
-# 28 "master.c" 2
-
-# 1 "./I2C.h" 1
-# 20 "./I2C.h"
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdint.h" 1 3
-# 20 "./I2C.h" 2
-# 29 "./I2C.h"
-void I2C_Master_Init(const unsigned long c);
-
-
-
-
-
-
-
-void I2C_Master_Wait(void);
-
-
-
-void I2C_Master_Start(void);
-
-
-
-void I2C_Master_RepeatedStart(void);
-
-
-
-void I2C_Master_Stop(void);
-
-
-
-
-
-void I2C_Master_Write(unsigned d);
-
-
-
-
-unsigned short I2C_Master_Read(unsigned short a);
-
-
-
-void I2C_Slave_Init(uint8_t address);
-# 29 "master.c" 2
-
-# 1 "./USART.h" 1
-# 13 "./USART.h"
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.32\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "./USART.h" 2
 
 
 void init_USART (void);
 char USART_Receive(void);
 void USART_Transmit(char dato);
-# 30 "master.c" 2
+# 7 "USART.c" 2
 
 
 
 
-void initSETUP(void);
-void str_2_dc(uint16_t var);
-
-
-
-uint8_t unit0, dec0, unit1, dec1, unit0_0, dec0_12,dec1_12;
-unsigned char Humidity=0;
-unsigned char RH=0;
-int LDR = 0;
-uint8_t test =0;
-uint8_t cont = 0,cont1 = 0;
-uint8_t F1=0;
-uint8_t counter, tempRX;
-
-
-void main(void) {
-    initSETUP();
-    Lcd_Init();
-    Lcd_Clear();
-    Lcd_Set_Cursor(1,1);
-    Lcd_Write_String(" RH:   T:   L%:");
-    while(1){
-        I2C_Master_Start();
-        I2C_Master_Write(0x81);
-        if (test==0){
-                RH=I2C_Master_Read(0);
-                test = 1;
-            }
-                else if (test==1){
-                Humidity=I2C_Master_Read(0);
-                test = 0;
-            }
-        I2C_Master_Stop();
-        _delay((unsigned long)((200)*(8000000/4000.0)));
-        I2C_Master_Start();
-        I2C_Master_Write(0x61);
-        LDR = I2C_Master_Read(0);
-        I2C_Master_Stop();
-        _delay((unsigned long)((200)*(8000000/4000.0)));
-        Lcd_Set_Cursor(2,1);
-
-        unit0 = 48 + ((Humidity/10) %10);
-        dec0 = 48 + (Humidity %10);
-        unit1 =48 + ((RH / 10) % 10);
-        dec1 = 48 + (RH % 10);
-
-
-        Lcd_Write_Char(unit0);
-        Lcd_Write_Char(dec0);
-        Lcd_Write_String("%   ");
-        Lcd_Write_Char(unit1);
-        Lcd_Write_Char(dec1);
-        Lcd_Write_Char(223);
-        Lcd_Write_String("C  ");
-
-        str_2_dc(LDR);
-        Lcd_Write_Char(unit0_0);
-        Lcd_Write_Char(dec0_12);
-        Lcd_Write_Char(dec1_12);
-        Lcd_Write_String("%");
-
-
-
-        if(RH>34 && cont ==1){
-
-            PORTAbits.RA3 = 1;
-            _delay((unsigned long)((3000)*(8000000/4000.0)));
-            PORTAbits.RA3 = 0;
-            cont =0;
-        }
-        else if(RH<35 && cont ==0){
-            PORTAbits.RA3 = 0;
-            cont = 1;
-
-        }
-        else if (20<LDR<=80 && cont1 ==0){
-
-            PORTAbits.RA0 = 1;
-            _delay((unsigned long)((2000)*(8000000/4000000.0)));
-            PORTAbits.RA0 = 0;
-            _delay((unsigned long)((1000)*(8000000/4000.0)));
-            cont1 = 1;
-
-        }
-        else if (LDR<=20 && cont1==1){
-
-            cont1 = 0;
-            PORTAbits.RA0 = 1;
-            _delay((unsigned long)((1000)*(8000000/4000000.0)));
-            PORTAbits.RA0 = 0;
-            _delay((unsigned long)((1000)*(8000000/4000.0)));
-            Lcd_Clear();
-            Lcd_Set_Cursor(1,1);
-            Lcd_Write_String("DISPENSANDO");
-            Lcd_Set_Cursor(2,1);
-            Lcd_Write_String(" COMIDA...");
-            _delay((unsigned long)((5000)*(8000000/4000.0)));
-            Lcd_Clear();
-            Lcd_Set_Cursor(1,1);
-            Lcd_Write_String(" RH:   T:   L%:");
-            _delay((unsigned long)((500)*(8000000/4000.0)));
-
-        }
-        else if(LDR>80 && cont1==1){
-
-            cont1 = 0;
-            PORTAbits.RA0 = 1;
-            _delay((unsigned long)((1000)*(8000000/4000000.0)));
-            PORTAbits.RA0 = 0;
-            _delay((unsigned long)((20)*(8000000/4000.0)));
-            _delay((unsigned long)((1000)*(8000000/4000.0)));
-
-            Lcd_Clear();
-            Lcd_Set_Cursor(1,1);
-            Lcd_Write_String("DISPENSANDO");
-            Lcd_Set_Cursor(2,1);
-            Lcd_Write_String(" COMIDA...");
-            _delay((unsigned long)((5000)*(8000000/4000.0)));
-
-
-            Lcd_Clear();
-            Lcd_Set_Cursor(1,1);
-            Lcd_Write_String(" RH:   T:   L%:");
-            _delay((unsigned long)((500)*(8000000/4000.0)));
-    }
-    }
-    return;
-}
-
-
-
-void __attribute__((picinterrupt((""))))isr(void){
-    if(PIR1bits.RCIF == 1){
-        tempRX = RCREG;
-        if(tempRX ==0x00){
-           if (PIR1bits.TXIF == 1){
-        switch(F1){
-            case 0:
-                TXREG = unit0;
-                F1 = 1;
-                break;
-            case 1:
-                TXREG = dec0;
-                F1 = 0;
-                break;
-        }
-        PIR1bits.RCIF = 0;
-        TXIF=0;
-    }
-        }
-
-}
-}
-void str_2_dc(uint16_t var){
-    uint16_t vcv;
-    vcv = var;
-    unit0_0 = (vcv/100) ;
-    vcv = (vcv - (unit0_0*100));
-    dec0_12 = (vcv/10);
-    vcv = (vcv - (dec0_12*10));
-    dec1_12 = (vcv);
-    unit0_0 = unit0_0 + 48;
-    dec0_12 = dec0_12 + 48;
-    dec1_12 = dec1_12 + 48;
-
-}
-
-
-
-
-void initSETUP(void){
-    TRISA = 0;
-    TRISB = 0;
-    TRISC = 0b11000000;
-    TRISD = 0;
-    TRISE = 0;
-    PORTE = 0;
-    PORTA = 0;
-    PORTB = 0;
-    PORTC = 0;
-    PORTD = 0;
-    ANSEL = 0;
-    ANSELH = 0;
-    OSCCONbits.IRCF2 = 1;
-    OSCCONbits.IRCF1 = 1;
-    OSCCONbits.IRCF0 = 1;
-    OSCCONbits.SCS = 1;
+void init_USART (void){
     TXSTAbits.SYNC = 0;
     TXSTAbits.BRGH = 1;
     BAUDCTLbits.BRG16 = 1;
@@ -3022,9 +2652,12 @@ void initSETUP(void){
     RCSTAbits.RX9 = 0;
     RCSTAbits.CREN = 1;
     TXSTAbits.TXEN = 1;
+}
+char USART_Receive(){
+    return RCREG;
+   }
 
-    INTCONbits.GIE = 1;
-    INTCONbits.PEIE =1;
-    I2C_Master_Init(100000);
-    return;
+void USART_Transmit(char dato){
+    while(TXSTAbits.TRMT == 0);
+    TXREG = dato;
 }
