@@ -32,13 +32,15 @@
 // FUNCTION PROTOTYPES
 void initSETUP(void);
 void str_2_dc(uint16_t var);
+
+
 // VARIABLES
 uint8_t unit0, dec0, unit1, dec1, unit0_0, dec0_12,dec1_12;
 unsigned char Humidity=0;
 unsigned char RH=0;
 int LDR = 0;
 uint8_t test =0;
-uint8_t cont = 0;
+uint8_t cont = 0,cont1 = 0;
 
 
 void main(void) {
@@ -48,9 +50,9 @@ void main(void) {
     Lcd_Set_Cursor(1,1);
     Lcd_Write_String(" RH:   T:   L%:");
     while(1){
-        I2C_Master_Start();         //Se inicializa la comunicacion I2C
-        I2C_Master_Write(0x81);     //first slave
-        if (test==0){
+        I2C_Master_Start();         // UTILIZAMOS I2C PARA OBTENER LOS DATOS 
+        I2C_Master_Write(0x81);     // PRIMER ESCLAVO
+        if (test==0){                           // HACEMOS POLLING PARA SABER QUE DATO NOS ENTRA
                 RH=I2C_Master_Read(0);
                 test = 1;
             }
@@ -58,73 +60,123 @@ void main(void) {
                 Humidity=I2C_Master_Read(0);
                 test = 0;
             }
-        I2C_Master_Stop();          //Termina la comunicacion 
+        I2C_Master_Stop();          //TERMINAMOS
         __delay_ms(200);
-        I2C_Master_Start();
-        I2C_Master_Write(0x61);
+        I2C_Master_Start();         // EMPEZAMOS SEGUNDA COM I2C
+        I2C_Master_Write(0x61);     // ADDRESS DEL SEGUNDO PIC
         LDR = I2C_Master_Read(0);
         I2C_Master_Stop();
         __delay_ms(200);
         Lcd_Set_Cursor(2,1);             
+                                                //CONVERSIONES ASCII PARA MOSTRAR EN LCD
         unit0 = 48 + ((Humidity/10) %10);
         dec0 = 48 + (Humidity %10);
         unit1 =48 + ((RH / 10) % 10);
         dec1 = 48 + (RH % 10);
-        Lcd_Write_Char(unit0);
+          
+        
+        Lcd_Write_Char(unit0);              //DESPLEGAMOS EN LCD
         Lcd_Write_Char(dec0);
         Lcd_Write_String("%   ");
         Lcd_Write_Char(unit1);
         Lcd_Write_Char(dec1);
         Lcd_Write_Char(223);
         Lcd_Write_String("C  ");
-        str_2_dc(LDR);
-        Lcd_Write_Char(unit0_0);
+        
+        str_2_dc(LDR);                      // CONVERTIMOS EN ASCII
+        Lcd_Write_Char(unit0_0);            // DESPLEGAMOS EN LCD
         Lcd_Write_Char(dec0_12);
         Lcd_Write_Char(dec1_12);
         Lcd_Write_String("%");
-        if (LDR<98){
-            cont=1;
+        
+        // CONTROL PARA LOS MOTORES
+        
+        if(RH>34 && cont ==1){
+            //Do something
+            PORTAbits.RA3 = 1;          // 5 V PARA HABILITAR LA BOMBA
+            __delay_ms(3000);           // LUEGO DE UN TIEMPO REGRESA A 0 V.
+            PORTAbits.RA3 = 0;          
+            cont =0;                    // con este contador evitamos que se sirva infinitamente.
+        }
+        else if(RH<35 && cont ==0){
+            PORTAbits.RA3 = 0;          // TODO EL TIEMPO ESTAMOS EN 0 V 
+            cont = 1;                            // SI NO SE CUMPLE LA CONDICION.
+            //Do something
+        }
+        else if (20<LDR<=80 && cont1 ==0){
+            // PONEMOS EN POSICION CERRADA EL SERVO PARA SERVIR COMIDA
             PORTAbits.RA0 = 1;
             __delay_us(2000);
             PORTAbits.RA0 = 0;
-            __delay_ms(20);
+            __delay_ms(1000);
+            cont1 = 1;
        // Lcd_Write_String("000");    
         }
-        else if(LDR==100){
-            cont=0;
+        else if (LDR<=20 && cont1==1){
+            // PONEMOS EN POSICION Abierta EL SERVO PARA SERVIR COMIDA
+            cont1 = 0;
+            PORTAbits.RA0 = 1;
+            __delay_us(1000);
+            PORTAbits.RA0 = 0;
+            __delay_ms(1000);
+            Lcd_Clear();
+            Lcd_Set_Cursor(1,1);
+            Lcd_Write_String("DISPENSANDO");
+            Lcd_Set_Cursor(2,1);
+            Lcd_Write_String(" COMIDA...");
+            __delay_ms(5000);
+            Lcd_Clear();
+            Lcd_Set_Cursor(1,1);
+            Lcd_Write_String(" RH:   T:   L%:");
+            __delay_ms(500);
+       // Lcd_Write_String("000");    
+        }
+        else if(LDR>80 && cont1==1){
+            // HACEMOS LA APERTURA DLE SERVO PARA SERVIR COMIDA
+            cont1 = 0;
             PORTAbits.RA0 = 1;
             __delay_us(1000);
             PORTAbits.RA0 = 0;
             __delay_ms(20);
+            __delay_ms(1000);
+            // UNICAMENTE SE MUESTRA QUE ESTAMOS DISPENSANDO COMIDA
             Lcd_Clear();
             Lcd_Set_Cursor(1,1);
-       Lcd_Write_String("DISPENSANDO");
-       Lcd_Set_Cursor(2,1);
-       Lcd_Write_String(" COMIDA...");
-       __delay_ms(5000);
-       Lcd_Clear();
-       Lcd_Set_Cursor(1,1);
-       Lcd_Write_String(" RH:   T:   L%:");
-        __delay_ms(500);
+            Lcd_Write_String("DISPENSANDO");
+            Lcd_Set_Cursor(2,1);
+            Lcd_Write_String(" COMIDA...");
+            __delay_ms(5000);
+            
+            // RESET AL LCD PARA VOLVER A LA INTERFAZ NORMAL
+            Lcd_Clear();
+            Lcd_Set_Cursor(1,1);
+            Lcd_Write_String(" RH:   T:   L%:");
+            __delay_ms(500);
     }
     }
     return;
 }
-void str_2_dc(uint16_t var){        // Función para obtener vcv decimal
+
+
+void str_2_dc(uint16_t var){       // PARA PODER OBTENER EL VALOR EN DECIMAL
     uint16_t vcv;
     vcv = var;                  
-    unit0_0 = (vcv/100) ;                //Valor del tercer digito
+    unit0_0 = (vcv/100) ;              //PRIMERO EN SIGNIFICANCIA
     vcv = (vcv - (unit0_0*100));
-    dec0_12 = (vcv/10);              //Valor del segundo digito
+    dec0_12 = (vcv/10);              //SEGUNDO EN SIGNIFICANCIA
     vcv = (vcv - (dec0_12*10));
-    dec1_12 = (vcv);                //Valor del primer digito
-    unit0_0 = unit0_0 + 48;          //Conversion a ascii
+    dec1_12 = (vcv);                //TERCERO EN SIGNIFICANCIA
+    unit0_0 = unit0_0 + 48;          //ASCII
     dec0_12 = dec0_12 + 48;
     dec1_12 = dec1_12 + 48;
     
 }
+
+// CONFIGURACION DEL MASTER
+
+
 void initSETUP(void){
-    TRISA = 0b00000000;
+    TRISA = 0; // SERVO y BOMBA DE AGUA
     TRISB = 0;
     TRISC = 0;
     TRISD = 0;
@@ -136,13 +188,13 @@ void initSETUP(void){
     PORTD = 0;
     ANSEL = 0;
     ANSELH = 0;
-    OSCCONbits.IRCF2 = 1; 
+    OSCCONbits.IRCF2 = 1; // 8MHz 
     OSCCONbits.IRCF1 = 1;
     OSCCONbits.IRCF0 = 1;
     OSCCONbits.SCS = 1;
     // MAIN INTERRUPTIONS
     INTCONbits.GIE = 1;
     INTCONbits.PEIE =1;
-    I2C_Master_Init(100000);
+    I2C_Master_Init(100000); //SET AL TIMER DEL MASTER
     return;
 }

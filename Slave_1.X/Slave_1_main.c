@@ -32,7 +32,7 @@
 
 
 // VARIABLES
-uint16_t ADCread=0;
+uint16_t ADCread=0;         // VALOR DEL ADC OBTENIDO DEL CANAL 0/AN0
 float supply;
 int LDR;
 uint8_t vcv,unit0,dec0,dec1,buffer;
@@ -43,41 +43,41 @@ void str_2_dc(uint16_t var);
 
 void main(void) {
     initSETUP();
-    ADCON0bits.GO = 1;
+    ADCON0bits.GO = 1; // LISTOS PARA REALIZAR CONVERSION
     while(1){
         supply = 5.0*ADCread/1024.0;
-        LDR = (100*supply)/1.185;
+        LDR = (100*supply)/1.185; // REALIZAMOS LA CONVERSION DEL RANGO PARA UNO DE 0-100%
         __delay_ms(50);
     }
     return;
 }
 
-void __interrupt()isr(void){
+void __interrupt()isr(void){        // INTERRUPCION PARA ENVIAR POR MEDIO DE I2C
     if (PIR1bits.ADIF == 1){                            
         ADCread = ADRESH;
-        PIR1bits.ADIF = 0; //Limpiar la bandera de ADC
+        PIR1bits.ADIF = 0; 
         __delay_us(60);
-        ADCON0bits.GO = 1; //Inicia la conversión de ADC
+        ADCON0bits.GO = 1;
     }
     if(PIR1bits.SSPIF == 1){ 
         SSPCONbits.CKP = 0;     
         if ((SSPCONbits.SSPOV) || (SSPCONbits.WCOL)){
-            buffer = SSPBUF;    //Lee el valor del buffer y lo agrega a la variable
-            SSPCONbits.SSPOV = 0;       //Se limpia la bandera de overflow
-            SSPCONbits.WCOL = 0;        //Se limpia el bit de colision
-            SSPCONbits.CKP = 1;         //Se habilita SCL
+            buffer = SSPBUF;    
+            SSPCONbits.SSPOV = 0;       
+            SSPCONbits.WCOL = 0;        
+            SSPCONbits.CKP = 1;         
         }
         if(!SSPSTATbits.D_nA && !SSPSTATbits.R_nW) {
-            buffer = SSPBUF;     //Lee el valor del buffer y lo agrega a la variable
-            PIR1bits.SSPIF = 0;         //Limpia la bandera de SSP
-            SSPCONbits.CKP = 1;         //Habilita los pulsos del reloj SCL
-            while(!SSPSTATbits.BF);     //Hasta que la recepcion se realice
+            buffer = SSPBUF;     
+            PIR1bits.SSPIF = 0;         
+            SSPCONbits.CKP = 1;         
+            while(!SSPSTATbits.BF);     
             __delay_us(250);
         }else if(!SSPSTATbits.D_nA && SSPSTATbits.R_nW){
-            buffer = SSPBUF; //Lee el valor del buffer y lo agrega a la variabl
+            buffer = SSPBUF; 
             BF = 0;
-            SSPBUF = LDR;
-            SSPCONbits.CKP = 1;//Habilita los pulsos del reloj SCL
+            SSPBUF = LDR;           // ENVIAMOS EL VALOR DE LA LUMINOSIDAD EN SU FORMATO DE PERCENTIL
+            SSPCONbits.CKP = 1;
             __delay_us(250);
             while(SSPSTATbits.BF);
         }
@@ -85,22 +85,22 @@ void __interrupt()isr(void){
     }
 }
 
-void str_2_dc(uint16_t var){        // Función para obtener vcv decimal
+void str_2_dc(uint16_t var){        // FUNCION PARA CONVERTIR LOS DATOS EN ASCII
     uint16_t vcv;
     vcv = var;                  
-    unit0 = (vcv/100) ;                //Valor del tercer digito
-    vcv = (vcv - (unit0*100));
-    dec0 = (vcv/10);              //Valor del segundo digito
+    unit0 = (vcv/100) ;               
+    vcv = (vcv - (unit0*100));      // CONVERSION A DEC
+    dec0 = (vcv/10);             
     vcv = (vcv - (dec0*10));
-    dec1 = (vcv);                //Valor del primer digito
+    dec1 = (vcv);                
     
-    unit0 = unit0 + 48;          //Conversion a ascii
+    unit0 = unit0 + 48;  // ASCII         
     dec0 = dec0 + 48;
     dec1 = dec1 + 48;
     
 }
 void initSETUP(void){
-    TRISA = 0b00000001;
+    TRISA = 0b00000001; //RA0
     TRISB = 0;
     TRISC = 0;
     TRISD = 0;
@@ -110,26 +110,30 @@ void initSETUP(void){
     PORTB = 0;
     PORTC = 0;
     PORTD = 0;
-    ANSEL = 0b00000001;
+    ANSEL = 0b00000001; // AN0
     ANSELH = 0;
-    ADCON1bits.ADFM = 0; //Justificar a la izquierda
+    
+    // CONFIGURACION DEL ADC Y DE SU INTERRUPCION
+    
+    ADCON1bits.ADFM = 0; 
     ADCON1bits.VCFG0 = 0; //Vss
     ADCON1bits.VCFG1 = 0; //VDD
 
-    ADCON0bits.ADCS = 0b10; //ADC oscilador -> Fosc/32
-    ADCON0bits.CHS = 0;     //Comenzar en canal 0       
-    ADCON0bits.ADON = 1;    //Habilitar la conversión ADC
+    ADCON0bits.ADCS = 0b10; // Fosc/32
+    ADCON0bits.CHS = 0;     // CHANNEL 0/AN0      
+    ADCON0bits.ADON = 1;    // GO CONVERT...
     __delay_us(50); 
     ADCON0bits.GO = 1;
-    PIE1bits.ADIE = 1;   //Enable interrupción ADC
-    PIR1bits.ADIF = 0;   //Se limpia bandera de interrupción ADC
+    PIE1bits.ADIE = 1;   // ADC INTERRUPT ENABLE
+    PIR1bits.ADIF = 0;   // LIMPIAMOS LA BANDERA MANUALMENTE PARA EVITAR CUALQUIER MALA TOMA
     OSCCONbits.IRCF2 = 1; 
     OSCCONbits.IRCF1 = 1;
     OSCCONbits.IRCF0 = 1;
     OSCCONbits.SCS = 1;
+    
     // MAIN INTERRUPTIONS
     INTCONbits.GIE = 1;
     INTCONbits.PEIE =1;
-    I2C_Slave_Init(0x60);
+    I2C_Slave_Init(0x60); // DIRECCION DEL ESCLAVO PARA COMUNICARSE CON EL MASTER
     return;
 }

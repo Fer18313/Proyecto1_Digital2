@@ -27,6 +27,8 @@
 #include <pic16f887.h>
 #include "LCD.h"
 #include "I2C.h"
+
+// CRYSTAL DEL PIC
 #define _XTAL_FREQ 8000000
 
 // FUNCTION PROTOTYPES
@@ -47,51 +49,61 @@ unsigned char Humidity, RH;
 unsigned char check_sum;
 uint8_t unit0, dec0, unit1, dec1;
 
+// EL SENSOR DHT11 NECESITA QUE NOSOTROS LO INICIEMOS, PARA ELLO
+// UTILIZAMOS startRead()
+
+// ADEMAS NECESITAMOS CHEQUEAR SI TENEMOS RESPUESTA DEL MISMO
+// UTILIZAMOS checkResponse()
+
+// FINALMENTE EXTRAEMOS DATA DEL PIN
+// UTILIZAMOS DHT11_Read()
+
 
 
 void main(void) {
-    initSETUP();
+    initSETUP();                // CONFIGURACION DEL PIC ESCLAVO
     while (1){
-        startRead();
-        checkResponse();
-        RH_Int = DHT11_Read();
-        RH_Dec = DHT11_Read();
-        T_Int = DHT11_Read();
-        T_Dec = DHT11_Read();
-        check_sum = DHT11_Read();
-        RH = T_Int;   
-        Humidity = RH_Int; 
+        startRead();        // INICIAMOS EL SENSOR
+        checkResponse();    // CHEQUEAMOS SI RECIBIMOS ALGO
+        RH_Int = DHT11_Read();  // PRIMER BYTE
+        RH_Dec = DHT11_Read();  // SEGUNDO BYTE
+        T_Int = DHT11_Read();   // TERCER BYTE
+        T_Dec = DHT11_Read();   // CUARTO BYTE
+        check_sum = DHT11_Read();   // QUINTO BYTE| PARA ESTA APLICACION ESTA INUTILIZADO.
+        
+        RH = T_Int;     // GUARDAMOS EL VALOR DE TEMP   
+        Humidity = RH_Int;  // GUARDAMOS EL VALOR DE HUMEDAD RELATIVA
         __delay_ms(1000);
     }
     return;
 }
-void __interrupt()isr(void){
+void __interrupt()isr(void){ // INTERRUPCION PARA COMUNICARSE POR MEDIO DE I2C
      if(PIR1bits.SSPIF == 1){ 
         SSPCONbits.CKP = 0;     
         if ((SSPCONbits.SSPOV) || (SSPCONbits.WCOL)){
-            buffer = SSPBUF;    //Lee el valor del buffer y lo agrega a la variable
-            SSPCONbits.SSPOV = 0;       //Se limpia la bandera de overflow
-            SSPCONbits.WCOL = 0;        //Se limpia el bit de colision
-            SSPCONbits.CKP = 1;         //Se habilita SCL
+            buffer = SSPBUF;    
+            SSPCONbits.SSPOV = 0;       
+            SSPCONbits.WCOL = 0;        
+            SSPCONbits.CKP = 1;         
         }
         if(!SSPSTATbits.D_nA && !SSPSTATbits.R_nW) {
-            buffer = SSPBUF;     //Lee el valor del buffer y lo agrega a la variable
-            PIR1bits.SSPIF = 0;         //Limpia la bandera de SSP
-            SSPCONbits.CKP = 1;         //Habilita los pulsos del reloj SCL
-            while(!SSPSTATbits.BF);     //Hasta que la recepcion se realice
+            buffer = SSPBUF;     
+            PIR1bits.SSPIF = 0;      
+            SSPCONbits.CKP = 1;         
+            while(!SSPSTATbits.BF);     
             __delay_us(250);
         }else if(!SSPSTATbits.D_nA && SSPSTATbits.R_nW){
-            buffer = SSPBUF; //Lee el valor del buffer y lo agrega a la variabl
+            buffer = SSPBUF; 
             BF = 0;
-            if (test==0){
-                SSPBUF = RH;
+            if (test==0){                   // PARA ENVIAR AMBOS VALORES, UTILIZAMOS POLLING 
+                SSPBUF = RH;                // SUBIMOS AL BUFFER DATO DE TEMPERATURA
                 test = 1;
             }
                 else if (test==1){
-                SSPBUF = Humidity;
+                SSPBUF = Humidity;          // SUBIMOS AL BUFFER DATO DE HUMEDAD RELATIVA
                 test = 0;
                 }
-            SSPCONbits.CKP = 1;//Habilita los pulsos del reloj SCL
+            SSPCONbits.CKP = 1; // SCL PULSE ON
             __delay_us(250);
             while(SSPSTATbits.BF);
         }
@@ -119,25 +131,27 @@ void initSETUP(void){
     // MAIN INTERRUPTIONS
     INTCONbits.GIE = 1;
     INTCONbits.PEIE =1;
-    I2C_Slave_Init(0x80);
+    I2C_Slave_Init(0x80);   // DIRECCION DEL SLAVE PARA COMUNICARSE POR I2C
     return;
 }
-void startRead(){
-    TRISA = 0b00000010;
+
+
+void startRead(){               // RUTINA PARA INICIAR EL DHT11
+    TRISA = 0b00000010;     // OFF 
     PORTAbits.RA0 = 0;
-    __delay_ms(18);
+    __delay_ms(18);         // PULSO APAGADO DE 18ms, ES NECESARIO SEGUN DOCUMENTACION DEL DHT11
     PORTAbits.RA0 = 1;
-    __delay_us(30);
-    TRISA= 0b00000011;
+    __delay_us(30);         // FINALMENTE UN PULSO ENTRE 20-60 us
+    TRISA= 0b00000011;      // SET COMO ENTRADA EL PIN AN0;
 }
 
-void checkResponse(){
+void checkResponse(){           // NO NOS MOVEMOS HASTA OBTENER DATOS DEL SENSOR
     while (PORTAbits.RA0 & 1);
     while (!(PORTAbits.RA0 & 1));
     while (PORTAbits.RA0 & 1);
 }
 
-char DHT11_Read(){
+char DHT11_Read(){              // AQUI HACEMOS EL SHIFT DE LOS BITS PARA OBTENER
     char i,data = 0;
     for (i=0; i<8; i++){
         while(!(PORTAbits.RA0 & 1));

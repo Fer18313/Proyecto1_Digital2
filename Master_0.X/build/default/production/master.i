@@ -2818,12 +2818,14 @@ void I2C_Slave_Init(uint8_t address);
 void initSETUP(void);
 void str_2_dc(uint16_t var);
 
+
+
 uint8_t unit0, dec0, unit1, dec1, unit0_0, dec0_12,dec1_12;
 unsigned char Humidity=0;
 unsigned char RH=0;
 int LDR = 0;
 uint8_t test =0;
-uint8_t cont = 0;
+uint8_t cont = 0,cont1 = 0;
 
 
 void main(void) {
@@ -2851,10 +2853,13 @@ void main(void) {
         I2C_Master_Stop();
         _delay((unsigned long)((200)*(8000000/4000.0)));
         Lcd_Set_Cursor(2,1);
+
         unit0 = 48 + ((Humidity/10) %10);
         dec0 = 48 + (Humidity %10);
         unit1 =48 + ((RH / 10) % 10);
         dec1 = 48 + (RH % 10);
+
+
         Lcd_Write_Char(unit0);
         Lcd_Write_Char(dec0);
         Lcd_Write_String("%   ");
@@ -2862,39 +2867,82 @@ void main(void) {
         Lcd_Write_Char(dec1);
         Lcd_Write_Char(223);
         Lcd_Write_String("C  ");
+
         str_2_dc(LDR);
         Lcd_Write_Char(unit0_0);
         Lcd_Write_Char(dec0_12);
         Lcd_Write_Char(dec1_12);
         Lcd_Write_String("%");
-        if (LDR<98){
-            cont=1;
+
+
+
+        if(RH>34 && cont ==1){
+
+            PORTAbits.RA3 = 1;
+            _delay((unsigned long)((3000)*(8000000/4000.0)));
+            PORTAbits.RA3 = 0;
+            cont =0;
+        }
+        else if(RH<35 && cont ==0){
+            PORTAbits.RA3 = 0;
+            cont = 1;
+
+        }
+        else if (20<LDR<=80 && cont1 ==0){
+
             PORTAbits.RA0 = 1;
             _delay((unsigned long)((2000)*(8000000/4000000.0)));
             PORTAbits.RA0 = 0;
-            _delay((unsigned long)((20)*(8000000/4000.0)));
+            _delay((unsigned long)((1000)*(8000000/4000.0)));
+            cont1 = 1;
 
         }
-        else if(LDR==100){
-            cont=0;
+        else if (LDR<=20 && cont1==1){
+
+            cont1 = 0;
+            PORTAbits.RA0 = 1;
+            _delay((unsigned long)((1000)*(8000000/4000000.0)));
+            PORTAbits.RA0 = 0;
+            _delay((unsigned long)((1000)*(8000000/4000.0)));
+            Lcd_Clear();
+            Lcd_Set_Cursor(1,1);
+            Lcd_Write_String("DISPENSANDO");
+            Lcd_Set_Cursor(2,1);
+            Lcd_Write_String(" COMIDA...");
+            _delay((unsigned long)((5000)*(8000000/4000.0)));
+            Lcd_Clear();
+            Lcd_Set_Cursor(1,1);
+            Lcd_Write_String(" RH:   T:   L%:");
+            _delay((unsigned long)((500)*(8000000/4000.0)));
+
+        }
+        else if(LDR>80 && cont1==1){
+
+            cont1 = 0;
             PORTAbits.RA0 = 1;
             _delay((unsigned long)((1000)*(8000000/4000000.0)));
             PORTAbits.RA0 = 0;
             _delay((unsigned long)((20)*(8000000/4000.0)));
+            _delay((unsigned long)((1000)*(8000000/4000.0)));
+
             Lcd_Clear();
             Lcd_Set_Cursor(1,1);
-       Lcd_Write_String("DISPENSANDO");
-       Lcd_Set_Cursor(2,1);
-       Lcd_Write_String(" COMIDA...");
-       _delay((unsigned long)((5000)*(8000000/4000.0)));
-       Lcd_Clear();
-       Lcd_Set_Cursor(1,1);
-       Lcd_Write_String(" RH:   T:   L%:");
-        _delay((unsigned long)((500)*(8000000/4000.0)));
+            Lcd_Write_String("DISPENSANDO");
+            Lcd_Set_Cursor(2,1);
+            Lcd_Write_String(" COMIDA...");
+            _delay((unsigned long)((5000)*(8000000/4000.0)));
+
+
+            Lcd_Clear();
+            Lcd_Set_Cursor(1,1);
+            Lcd_Write_String(" RH:   T:   L%:");
+            _delay((unsigned long)((500)*(8000000/4000.0)));
     }
     }
     return;
 }
+
+
 void str_2_dc(uint16_t var){
     uint16_t vcv;
     vcv = var;
@@ -2908,8 +2956,12 @@ void str_2_dc(uint16_t var){
     dec1_12 = dec1_12 + 48;
 
 }
+
+
+
+
 void initSETUP(void){
-    TRISA = 0b00000000;
+    TRISA = 0;
     TRISB = 0;
     TRISC = 0;
     TRISD = 0;
